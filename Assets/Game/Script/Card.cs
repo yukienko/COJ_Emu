@@ -20,6 +20,9 @@ public class Card : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+
+
         if (Input.GetMouseButtonDown(0))
         {
             RayCheck();
@@ -33,6 +36,22 @@ public class Card : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             beRay = false;
+            FieldCheck();
+        }
+    }
+
+    private void FieldCheck()
+    {
+        float lineX = 9.0f;
+        float lineY = 2.0f;
+
+        //マウスで離された先がフィールドだったら
+        if(Mathf.Abs(transform.position.x) < lineX && Mathf.Abs(transform.position.y) < lineY)
+        {
+
+        }
+        else
+        {
             transform.position = oldV3;
         }
     }
