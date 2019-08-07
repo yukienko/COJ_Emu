@@ -8,4 +8,13 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/Title.unity
+    guid: f26c6c7f679fe2d45917332e59ba8299
+  - enabled: 1
+    path: Assets/Scenes/DeckEdit.unity
+    guid: 39e89e469888ace49be269fe08354e32
+  - enabled: 1
+    path: Assets/Scenes/Game.unity
+    guid: 7bf8029501d934141824654c02627f1e
   m_configObjects: {}
