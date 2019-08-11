@@ -11,7 +11,7 @@ public class CardInstantiate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var cardMAX = 10; //存在できるカード上限
+        var cardMAX = 3; //存在できるカード上限
         OP_Card = GameObject.Find("ObjectPool_Card");
 
         // 子オブジェクトを全て取得する
