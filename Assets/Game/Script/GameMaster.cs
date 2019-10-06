@@ -44,19 +44,19 @@ public class GameMaster : MonoBehaviour
         }
     }
 
-    //CardData(int _id, string _name, int _level, int _cost)
+    //CardData(int _id, string _name, int _cp, int _color, int _race1, int _race2, int _level, int _bp1, int _bp2, int _bp3, string _effectText)
 
     List<CardData> player1CardDataList = new List<CardData>()
     {
-        new CardData(0,"name0",1,2),
-        new CardData(1,"name1",2,2),
-        new CardData(2,"name2",3,1),
+        new CardData(0,"name0",1,1,1,0,1,1000,2000,3000,"このユニットはテスト用です。効果なんてないよおおおおお"),
+        new CardData(2,"name1",2,2,2,0,1,2000,3000,4000,"このユニットはテスト2用です。効果なんてないよおおおおお"),
+        new CardData(3,"name2",3,3,3,8,1,3000,4000,5000,"このユニットはテスト3用です。効果なんてないよおおおおお"),
     };
     List<CardData> player2CardDataList = new List<CardData>()
     {
-        new CardData(0,"name0",1,2),
-        new CardData(1,"name1",1,2),
-        new CardData(2,"name2",1,2),
+        new CardData(4,"name3",4,4,4,0,1,4000,5000,6000,"このユニットはテスト4用です。効果なんてないよおおおおお"),
+        new CardData(5,"name4",5,5,5,0,1,5000,6000,7000,"このユニットはテスト5用です。効果なんてないよおおおおお"),
+        new CardData(6,"name5",6,0,0,0,1,0,0,0,"このユニットはテスト6用です。効果なんてないよおおおおお"),
     };
 
     void InitPhase()

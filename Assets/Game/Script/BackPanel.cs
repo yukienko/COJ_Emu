@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class BackPanel : MonoBehaviour
 {    
-    
-
     // Start is called before the first frame update
     void Start()
     {
