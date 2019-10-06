@@ -97,13 +97,15 @@ namespace RU5
             四聖獣,
             武神
         }
-        public enum CardRarity
+        public enum CardType
         {
-            C,
-            UC,
-            R,
-            VR,
-            SR
+            ユ,
+            進,
+            イ,
+            ト,
+            J,
+            ウ,
+            カ
         };
         public enum CardColor
         {
@@ -119,7 +121,7 @@ namespace RU5
 
         //カードの情報
         string name = "アーミーアント";
-        CardRarity rarity = CardRarity.UC;
+        CardType rarity = CardType.ユ;
         CardColor color = CardColor.赤;
         CardRace race = CardRace.昆虫;
         CardRace race2 = CardRace.なし;

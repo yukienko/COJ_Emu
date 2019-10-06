@@ -97,13 +97,15 @@ namespace RU10
             四聖獣,
             武神
         }
-        public enum CardRarity
+        public enum CardType
         {
-            C,
-            UC,
-            R,
-            VR,
-            SR
+            ユ,
+            進,
+            イ,
+            ト,
+            J,
+            ウ,
+            カ
         };
         public enum CardColor
         {
@@ -119,7 +121,7 @@ namespace RU10
 
         //カードの情報
         string name = "蠅魔王ベルゼブブ";
-        CardRarity rarity = CardRarity.SR;
+        CardType rarity = CardType.ユ;
         CardColor color = CardColor.赤;
         CardRace race = CardRace.悪魔;
         CardRace race2 = CardRace.なし;

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace RU6
+namespace RU14
 {
-    public class RU6 : MonoBehaviour
+    public class RU14 : MonoBehaviour
     {
         //今のデッキ枚数
         Text DeckCount;
@@ -120,19 +120,19 @@ namespace RU6
         //仮置き用のオブジェクト
 
         //カードの情報
-        string name = "石川五右衛門";
-        CardType rarity = CardType.ユ;
+        string name = "絶望の天魔アザゼル";
+        CardType rarity = CardType.進;
         CardColor color = CardColor.赤;
-        CardRace race = CardRace.盗賊;
+        CardRace race = CardRace.天使;
         CardRace race2 = CardRace.なし;
-        int cp = 7;
-        int bp1 = 5000;
-        int bp2 = 6000;
-        int bp3 = 7000;
+        int cp = 4;
+        int bp1 = 6000;
+        int bp2 = 7000;
+        int bp3 = 8000;
 
-        string effect = "【スピードムーブ】\n■伝説の大盗賊\nこのユニットがプレイヤーアタックに成功した時、全てのユニットをオーバークロックさせる。";
+        string effect = "■堕天使の鎮魂歌\nこのユニットがフィールドに出た時、対戦相手のトリガーゾーンにあるカードを２枚ランダムで破壊する。対戦相手のトリガーゾーンにカードがない場合、あなたのデッキからランダムで１枚トリガーゾーンにインターセプトカードをセットする。このユニットがアタックした時、対戦相手の全てのレベル２以上のユニットに６０００ダメージを与える。あなたのレベル２以上のユニットに【スピードムーブ】を与える。";
 
-        string flavor = "伝説の大盗賊をモチーフに創られたユニット。悪のカリスマ性によって徒党を組み、一瞬にして全てを奪い去る。";
+        string flavor = "人々に絶望を与える堕天使。弱き者からは抗う術を奪い、強き者にはその漆黒の剣で煉獄の制裁を与える。";
 
         Text Name = GameObject.Find("CardName").GetComponent<Text>();
         Text Color = GameObject.Find("CardColor").GetComponent<Text>();
