@@ -52,5 +52,9 @@
         "ProjectSettings/":true,
         "temp/":true,
         "Temp/":true
-    }
+    },
+    "backgroundCover.autoStatus": true,
+    "backgroundCover.randomImageFolder": "C:\\Users\\yukineko\\Pictures\\VS",
+    "backgroundCover.imagePath": "C:\\Users\\yukineko\\Pictures\\VS\\maxresdefault (1).jpg",
+    "backgroundCover.opacity": 1
 }

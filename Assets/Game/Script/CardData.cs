@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/*
+
+カードに必要な情報（変数）を宣言し、CardDataでGameMasterから送られてきたカード情報を読み込み、それをCardに送る。
+
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

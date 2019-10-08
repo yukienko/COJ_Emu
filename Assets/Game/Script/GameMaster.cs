@@ -1,4 +1,4 @@
-ï»¿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -48,37 +48,37 @@ public class GameMaster : MonoBehaviour
 
     List<CardData> player1CardDataList = new List<CardData>()
     {
-        new CardData(0,"name0",1,1,1,0,1,1000,2000,3000,"ã“ã®ãƒ¦ãƒ‹ãƒƒãƒˆã¯ãƒ†ã‚¹ãƒˆç”¨ã§ã™ã€‚åŠ¹æœãªã‚“ã¦ãªã„ã‚ˆãŠãŠãŠãŠãŠ"),
-        new CardData(2,"name1",2,2,2,0,1,2000,3000,4000,"ã“ã®ãƒ¦ãƒ‹ãƒƒãƒˆã¯ãƒ†ã‚¹ãƒˆ2ç”¨ã§ã™ã€‚åŠ¹æœãªã‚“ã¦ãªã„ã‚ˆãŠãŠãŠãŠãŠ"),
-        new CardData(3,"name2",3,3,3,8,1,3000,4000,5000,"ã“ã®ãƒ¦ãƒ‹ãƒƒãƒˆã¯ãƒ†ã‚¹ãƒˆ3ç”¨ã§ã™ã€‚åŠ¹æœãªã‚“ã¦ãªã„ã‚ˆãŠãŠãŠãŠãŠ"),
+        new CardData(0,"name0",1,1,1,0,1,1000,2000,3000,"‚±‚Ìƒ†ƒjƒbƒg‚ÍƒeƒXƒg—p‚Å‚·BŒø‰Ê‚È‚ñ‚Ä‚È‚¢‚æ‚¨‚¨‚¨‚¨‚¨"),
+        new CardData(2,"name1",2,2,2,0,1,2000,3000,4000,"‚±‚Ìƒ†ƒjƒbƒg‚ÍƒeƒXƒg2—p‚Å‚·BŒø‰Ê‚È‚ñ‚Ä‚È‚¢‚æ‚¨‚¨‚¨‚¨‚¨"),
+        new CardData(3,"name2",3,3,3,8,1,3000,4000,5000,"‚±‚Ìƒ†ƒjƒbƒg‚ÍƒeƒXƒg3—p‚Å‚·BŒø‰Ê‚È‚ñ‚Ä‚È‚¢‚æ‚¨‚¨‚¨‚¨‚¨"),
     };
     List<CardData> player2CardDataList = new List<CardData>()
     {
-        new CardData(4,"name3",4,4,4,0,1,4000,5000,6000,"ã“ã®ãƒ¦ãƒ‹ãƒƒãƒˆã¯ãƒ†ã‚¹ãƒˆ4ç”¨ã§ã™ã€‚åŠ¹æœãªã‚“ã¦ãªã„ã‚ˆãŠãŠãŠãŠãŠ"),
-        new CardData(5,"name4",5,5,5,0,1,5000,6000,7000,"ã“ã®ãƒ¦ãƒ‹ãƒƒãƒˆã¯ãƒ†ã‚¹ãƒˆ5ç”¨ã§ã™ã€‚åŠ¹æœãªã‚“ã¦ãªã„ã‚ˆãŠãŠãŠãŠãŠ"),
-        new CardData(6,"name5",6,0,0,0,1,0,0,0,"ã“ã®ãƒ¦ãƒ‹ãƒƒãƒˆã¯ãƒ†ã‚¹ãƒˆ6ç”¨ã§ã™ã€‚åŠ¹æœãªã‚“ã¦ãªã„ã‚ˆãŠãŠãŠãŠãŠ"),
+        new CardData(4,"name3",4,4,4,0,1,4000,5000,6000,"‚±‚Ìƒ†ƒjƒbƒg‚ÍƒeƒXƒg4—p‚Å‚·BŒø‰Ê‚È‚ñ‚Ä‚È‚¢‚æ‚¨‚¨‚¨‚¨‚¨"),
+        new CardData(5,"name4",5,5,5,0,1,5000,6000,7000,"‚±‚Ìƒ†ƒjƒbƒg‚ÍƒeƒXƒg5—p‚Å‚·BŒø‰Ê‚È‚ñ‚Ä‚È‚¢‚æ‚¨‚¨‚¨‚¨‚¨"),
+        new CardData(6,"name5",6,0,0,0,1,0,0,0,"‚±‚Ìƒ†ƒjƒbƒg‚ÍƒeƒXƒg6—p‚Å‚·BŒø‰Ê‚È‚ñ‚Ä‚È‚¢‚æ‚¨‚¨‚¨‚¨‚¨"),
     };
 
     void InitPhase()
     {
         Debug.Log("InitPhase");
-        //ãƒ‡ãƒƒã‚­ã®ç”Ÿæˆ
+        //ƒfƒbƒL‚Ì¶¬
         deckGenerater.Generate(player1CardDataList, playerList[0].deck);
         deckGenerater.Generate(player2CardDataList, playerList[1].deck);
 
-        //ç¾åœ¨ã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
+        //Œ»İ‚ÌƒvƒŒƒCƒ„[
         phase = Phase.DRAW;
     }
     void DrawPhase()
     {
         Debug.Log("DrawPhase");
-        //ã‚«ãƒ¼ãƒ‰ã®ãƒ‰ãƒ­ãƒ¼
+        //ƒJ[ƒh‚Ìƒhƒ[
         phase = Phase.STANDBY;
     }
     void StandbyPhase()
     {
         Debug.Log("StandbyPhase");
-        //CPå›å¾©+1(ä¸Šé™ï¼—)ã€è¡Œå‹•æ¨©å›å¾©
+        //CP‰ñ•œ+1(ãŒÀ‚V)As“®Œ ‰ñ•œ
         phase = Phase.BATTLE;
     }
     void BattlePhase()

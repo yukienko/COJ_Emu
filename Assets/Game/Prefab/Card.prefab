@@ -551,6 +551,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelText: {fileID: 3536428899752613639}
+  CPText: {fileID: 6646159007596392688}
+  BPText: {fileID: 995203316586845551}
 --- !u!1 &5974776163000322467
 GameObject:
   m_ObjectHideFlags: 0

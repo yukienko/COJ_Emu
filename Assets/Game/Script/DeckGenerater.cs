@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿/*
+
+Cardより受け取った情報をもとにカードの生成を行い、デッキに追加する。
+
+ */
+
+
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
