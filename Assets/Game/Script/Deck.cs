@@ -8,7 +8,7 @@ public class Deck : MonoBehaviour
 
     public void Add(Card _card)
     {
-        _card.transform.SetParent(this.transform);
+        _card.transform.SetParent(this.transform,false);
         cardList.Add(_card);
     }
     public Card Pull(int _position)

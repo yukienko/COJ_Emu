@@ -13,8 +13,9 @@ public class Card : MonoBehaviour
 {
     public Text levelText;
     public Text CPText;
-    public Text BPText;    
-    string name;
+    public Text BPText; 
+    int id;
+    new string name;
     int cp;
     int color;
     int[] race = new int[2];
@@ -25,6 +26,7 @@ public class Card : MonoBehaviour
     //DeckGeneraterの中でしか起こらないのでレベルに対応したBp変化はいらない
     public void Load(CardData _cardData)
     {
+        id = _cardData.id;
         name = _cardData.name;
         cp = _cardData.cp;
         CPText.text = cp.ToString();

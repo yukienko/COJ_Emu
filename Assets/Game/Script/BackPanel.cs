@@ -15,6 +15,7 @@ public class BackPanel : MonoBehaviour
         pathname = Path.Combine(pathname, "User");
         //UserフォルダのBackPanelをテクスチャとしてBackPanelに張り付け
         var BackPanelPath = Path.Combine(pathname, "BP.jpg");
+        Debug.Log(BackPanelPath);
         //テクスチャ変更
         Texture BackPanel_texture = this.GetComponent<Texture>();
         if (!File.Exists(BackPanelPath))
