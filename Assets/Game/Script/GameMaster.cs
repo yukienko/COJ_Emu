@@ -59,6 +59,9 @@ public class GameMaster : MonoBehaviour
         new CardData(6,"name5",6,0,0,0,1,0,0,0,"このユニットはテスト6用です。効果なんてないよおおおおお"),
     };
 
+    Player currentPlayer;
+    Player waitPlayer;
+
     void InitPhase()
     {
         Debug.Log("InitPhase");
@@ -67,13 +70,21 @@ public class GameMaster : MonoBehaviour
         deckGenerater.Generate(player2CardDataList, playerList[1].deck);
 
         //現在のプレイヤー
+        currentPlayer = playerList[0];
+        waitPlayer    = playerList[1];
+
         phase = Phase.DRAW;
     }
     void DrawPhase()
     {
         Debug.Log("DrawPhase");
         //カードのドロー
+        
         phase = Phase.STANDBY;
+    }
+    public void DrawButton()
+    {
+        currentPlayer.Draw();
     }
     void StandbyPhase()
     {
