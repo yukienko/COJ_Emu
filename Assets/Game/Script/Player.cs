@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public Field field;
     public Deck deck;
     public Sutehuda sutehuda;
+    public TurnTimer timer;
 
     public void Draw()
     {
