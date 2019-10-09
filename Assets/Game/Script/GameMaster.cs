@@ -51,6 +51,8 @@ public class GameMaster : MonoBehaviour
         new CardData(1,"name0",1,1,1,0,1,1000,2000,3000,"このユニットはテスト用です。効果なんてないよおおおおお"),
         new CardData(2,"name1",2,2,2,0,1,2000,3000,4000,"このユニットはテスト2用です。効果なんてないよおおおおお"),
         new CardData(3,"name2",3,3,3,8,1,3000,4000,5000,"このユニットはテスト3用です。効果なんてないよおおおおお"),
+        new CardData(4,"name3",4,4,4,0,1,4000,5000,6000,"このユニットはテスト4用です。効果なんてないよおおおおお"),
+        new CardData(5,"name4",5,5,5,0,1,5000,6000,7000,"このユニットはテスト5用です。効果なんてないよおおおおお"),
     };
     List<CardData> player2CardDataList = new List<CardData>()
     {

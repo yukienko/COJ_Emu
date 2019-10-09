@@ -21,6 +21,9 @@ public class Player : MonoBehaviour
     public void MainPhaseAction()
     {
         Card card = hand.Pull(0);
+        //カードの拡大
+        Vector3 fieldUnitScale = new Vector3(1.4f, 1.4f, 1.4f);
+        card.transform.localScale = fieldUnitScale;
         field.Add(card);
     }
 }
