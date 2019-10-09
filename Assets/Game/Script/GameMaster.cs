@@ -11,7 +11,7 @@ public class GameMaster : MonoBehaviour
     {
         INIT,
         DRAW,
-        STANDBY,
+        MAIN,
         BATTLE,
         END,
     };
@@ -32,8 +32,8 @@ public class GameMaster : MonoBehaviour
             case Phase.DRAW:
                 DrawPhase();
                 break;
-            case Phase.STANDBY:
-                StandbyPhase();
+            case Phase.MAIN:
+                MainPhase();
                 break;
             case Phase.BATTLE:
                 BattlePhase();
@@ -80,17 +80,25 @@ public class GameMaster : MonoBehaviour
         //Debug.Log("DrawPhase");
         //カードのドロー
         
-        phase = Phase.STANDBY;
+        phase = Phase.MAIN;
     }
+
+    //ターン制御にする
     public void DrawButton()
     {
         currentPlayer.Draw();
     }
-    void StandbyPhase()
+    void MainPhase()
     {
         //Debug.Log("StandbyPhase");
         //CP回復+1(上限７)、行動権回復
         phase = Phase.BATTLE;
+    }
+
+    //プレイヤーの移動させたカードにする
+    public void SummonButton()
+    {
+        currentPlayer.MainPhaseAction();
     }
     void BattlePhase()
     {

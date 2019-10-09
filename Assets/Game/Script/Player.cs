@@ -12,8 +12,15 @@ public class Player : MonoBehaviour
 
     public void Draw()
     {
-        //デッキの何番目のカードを引く
+        //デッキの何番目のカードを対象に
         Card card = deck.Pull(0);
+        //手札に移動
         hand.Add(card);
+    }
+
+    public void MainPhaseAction()
+    {
+        Card card = hand.Pull(0);
+        field.Add(card);
     }
 }
