@@ -77,7 +77,7 @@ public class GameMaster : MonoBehaviour
     }
     void DrawPhase()
     {
-        Debug.Log("DrawPhase");
+        //Debug.Log("DrawPhase");
         //カードのドロー
         
         phase = Phase.STANDBY;
@@ -88,18 +88,18 @@ public class GameMaster : MonoBehaviour
     }
     void StandbyPhase()
     {
-        Debug.Log("StandbyPhase");
+        //Debug.Log("StandbyPhase");
         //CP回復+1(上限７)、行動権回復
         phase = Phase.BATTLE;
     }
     void BattlePhase()
     {
-        Debug.Log("BattlePhase");
+        //Debug.Log("BattlePhase");
         phase = Phase.END;
     }
     void EndPhase()
     {
-        Debug.Log("EndPhase");
+        //Debug.Log("EndPhase");
         phase = Phase.DRAW;
     }
 }
