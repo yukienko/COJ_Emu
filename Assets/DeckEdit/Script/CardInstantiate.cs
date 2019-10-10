@@ -17,7 +17,7 @@ public class CardInstantiate : MonoBehaviour
         // 子オブジェクトを全て取得する
         foreach (Transform childTransform in this.transform)
         {
-            Debug.Log(childTransform.gameObject.name);
+
             for (int i = 0; i < cardMAX; i++)
             {
                 GameObject card = (GameObject)Instantiate(childTransform.gameObject, transform.position, Quaternion.identity);
