@@ -13,16 +13,15 @@ public class ReadText : MonoBehaviour
     private void Start()
     {
         TextAsset textasset = new TextAsset(); //テキストファイルのデータを取得するインスタンスを作成
-        textasset = Resources.Load("Test", typeof(TextAsset)) as TextAsset; //Resourcesフォルダから対象テキストを取得
+        textasset = Resources.Load("CardData", typeof(TextAsset)) as TextAsset; //Resourcesフォルダから対象テキストを取得
         string TextLines = textasset.text; //テキスト全体をstring型で入れる変数を用意して入れる
 
         //Splitで一行づつを代入した1次配列を作成
         textMessage = TextLines.Split('\n'); //
 
         //行数と列数を取得
-        columnLength = textMessage[0].Split('\t').Length;
+        columnLength = textMessage[0].Split(',').Length;
         rowLength = textMessage.Length;
-        Debug.Log(textMessage.Length);
 
         //2次配列を定義
         textWords = new string[rowLength, columnLength];
@@ -30,7 +29,7 @@ public class ReadText : MonoBehaviour
         for (int i = 0; i < rowLength; i++)
         {
 
-            string[] tempWords = textMessage[i].Split('\t'); //textMessageをカンマごとに分けたものを一時的にtempWordsに代入
+            string[] tempWords = textMessage[i].Split(','); //textMessageをカンマごとに分けたものを一時的にtempWordsに代入
 
             for (int n = 0; n < columnLength; n++)
             {
