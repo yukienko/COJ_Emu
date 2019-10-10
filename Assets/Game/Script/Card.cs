@@ -13,7 +13,7 @@ public class Card : MonoBehaviour
 {
     public Text levelText;
     public Text CPText;
-    public Text BPText; 
+    public Text BPText;
     int id;
     new string name;
     int cp;
