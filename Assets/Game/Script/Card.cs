@@ -39,6 +39,5 @@ public class Card : MonoBehaviour
         BPText.text = bp[0].ToString();
         level = _cardData.level;
         levelText.text = level.ToString();
-        
     }
 }
