@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Card_DE : MonoBehaviour
 {
@@ -13,6 +15,20 @@ public class Card_DE : MonoBehaviour
 	public int[] bp = new int[3];
 	public string effectText;
 	public string flavorText;
+	public Infomation_DE infomation_DE;
+
+	private void Start()
+	{
+		infomation_DE = GameObject.Find("Infomation").GetComponent<Infomation_DE>();
+	}
+
+	public void MyPointerDownUI()
+	{
+		Debug.Log(name);
+
+		CardData_DE cardDataList = new CardData_DE(id, name, section, cp, color, race[0], race[1], bp[0], bp[1], bp[2], effectText, flavorText);
+		infomation_DE.LoadInfo(cardDataList);
+	}
 
 	//DeckGeneraterの中でしか起こらないのでレベルに対応したBp変化はいらない
 	public void Load(CardData_DE _cardData)

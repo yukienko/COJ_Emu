@@ -105,7 +105,7 @@ namespace RU1
             ト,
             J,
             ウ,
-            カ
+            カ //カエル
         };
         public enum CardColor
         {
