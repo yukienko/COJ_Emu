@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,14 +18,88 @@ public class Infomation_DE : MonoBehaviour
 	public Text effect;
 	public Text flavor;
 
+	enum Section
+	{
+		ジ,
+		ユ,
+		進,
+		ト,
+		イ,
+		ウ,
+		カ,
+	};
+
+	public enum CardRace
+	{
+		なし,
+		獣,
+		戦士,
+		珍獣,
+		悪魔,
+		巨人,
+		精霊,
+		機械,
+		侍,
+		ドラゴン,
+		魔導士,
+		天使,
+		神,
+		不死,
+		忍者,
+		海洋,
+		英雄,
+		神獣,
+		舞姫,
+		盗賊,
+		昆虫,
+		道化師,
+		四聖獣,
+		武神
+	}
+	public enum CardColor
+	{
+		無,
+		赤,
+		黄,
+		青,
+		緑,
+		紫
+	};
 
 	public void LoadInfo(CardData_DE cardData_DE)
 	{
 		name.text = cardData_DE.name;
-		section.text = cardData_DE.section.ToString();
-		color.text = cardData_DE.color.ToString();
-		race1.text = cardData_DE.race1.ToString();
-		race2.text = cardData_DE.race2.ToString();
+		for(int i = 0; i < Enum.GetNames(typeof(Section)).Length; i++)
+		{
+			if(cardData_DE.section == i)
+			{
+				Section _section = (Section)Enum.ToObject(typeof(Section), i);
+				section.text = _section.ToString();
+			}
+		}
+		for (int i = 0; i < Enum.GetNames(typeof(CardRace)).Length; i++)
+		{
+			if (cardData_DE.race1 == i)
+			{
+				CardRace _cardRace = (CardRace)Enum.ToObject(typeof(CardRace), i);
+
+				race1.text = _cardRace.ToString();
+			}
+			if (cardData_DE.race2 == i)
+			{
+				CardRace _cardRace = (CardRace)Enum.ToObject(typeof(CardRace), i);
+
+				race2.text = _cardRace.ToString();
+			}
+		}
+		for (int i = 0; i < Enum.GetNames(typeof(CardColor)).Length; i++)
+		{
+			if (cardData_DE.color == i)
+			{
+				CardColor _color = (CardColor)Enum.ToObject(typeof(CardColor), i);
+				color.text = _color.ToString();
+			}
+		}
 		cp.text = cardData_DE.cp.ToString();
 		bp1.text = cardData_DE.bp1.ToString();
 		bp2.text = cardData_DE.bp2.ToString();
