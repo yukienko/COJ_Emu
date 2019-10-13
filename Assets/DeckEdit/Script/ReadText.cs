@@ -17,7 +17,7 @@ public class ReadText : MonoBehaviour
         string TextLines = textasset.text; //テキスト全体をstring型で入れる変数を用意して入れる
 
         //Splitで一行づつを代入した1次配列を作成
-        textMessage = TextLines.Split('\n'); //
+        textMessage = TextLines.Split('\t'); //
 
         //行数と列数を取得
         columnLength = textMessage[0].Split(',').Length;

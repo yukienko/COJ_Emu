@@ -10,14 +10,13 @@ public class CardGenerater_DE : MonoBehaviour
 	Sprite sprite;
 	string cardImagePath;
 
-	public void Generate(List<CardData_DE> _cardDataList, Deck_DE _deck)
+	public void Generate(CardData_DE _cardDataList, Deck_DE _deck)
 	{
-		for (int i = 0; i < _cardDataList.Count; i++)
-		{
+
 			GameObject cardObj = Instantiate(cardPrefab);
-			cardObj.name = _cardDataList[i].name;
+			cardObj.name = _cardDataList.name;
 			GameObject cardImage = cardObj.transform.Find("Image").gameObject;
-			cardImagePath = Environment.CurrentDirectory + "\\cardImage\\units\\unit (" + _cardDataList[i].id.ToString() + ").jpg";
+			cardImagePath = Environment.CurrentDirectory + "\\cardImage\\units\\unit (" + _cardDataList.id.ToString() + ").jpg";
 			Debug.Log(cardImagePath);
 
 			Texture Card_texture = cardImage.GetComponent<Texture>();
@@ -36,10 +35,9 @@ public class CardGenerater_DE : MonoBehaviour
 
 
 			Card_DE card = cardObj.GetComponent<Card_DE>();
-			card.Load(_cardDataList[i]);
+			card.Load(_cardDataList);
 			_deck.Add(card);
 		}
-	}
 
 	//フォルダ内のJPGを読み込む
 	Texture ReadTexture(string path, int width, int height)
