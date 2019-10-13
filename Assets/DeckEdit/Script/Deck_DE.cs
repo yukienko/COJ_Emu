@@ -8,8 +8,8 @@ public class Deck_DE : MonoBehaviour
 
 	public void Add(Card_DE _card)
 	{
-		GameObject deck = this.transform.Find("Content_Deck").gameObject;
-		_card.transform.SetParent(deck.transform, false);
+		//GameObject deck = this.transform.Find("Content_Deck").gameObject;
+		_card.transform.SetParent(transform, false);
 		cardList.Add(_card);
 	}
 

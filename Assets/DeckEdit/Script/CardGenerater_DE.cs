@@ -17,7 +17,7 @@ public class CardGenerater_DE : MonoBehaviour
 			GameObject cardObj = Instantiate(cardPrefab);
 			cardObj.name = _cardDataList[i].name;
 			GameObject cardImage = cardObj.transform.Find("Image").gameObject;
-			cardImagePath = Environment.CurrentDirectory + "\\cardImage\\unit (" + _cardDataList[i].id.ToString() + ").jpg";
+			cardImagePath = Environment.CurrentDirectory + "\\cardImage\\units\\unit (" + _cardDataList[i].id.ToString() + ").jpg";
 			Debug.Log(cardImagePath);
 
 			Texture Card_texture = cardImage.GetComponent<Texture>();
