@@ -16,18 +16,30 @@ public class Card_DE : MonoBehaviour
 	public string effectText;
 	public string flavorText;
 	public Infomation_DE infomation_DE;
+	public Deck_DE deck_DE;
 
 	private void Start()
 	{
 		infomation_DE = GameObject.Find("Infomation").GetComponent<Infomation_DE>();
+		deck_DE = transform.parent.gameObject.GetComponent<Deck_DE>();
 	}
 
 	public void MyPointerDownUI()
 	{
-		Debug.Log(name);
 
 		CardData_DE cardDataList = new CardData_DE(id, name, section, cp, color, race[0], race[1], bp[0], bp[1], bp[2], effectText, flavorText);
-		infomation_DE.LoadInfo(cardDataList);
+		if (Input.GetMouseButtonDown(1))
+		{
+			Debug.Log("Infomation");
+			//Qキーを押したままだと説明を表示
+			infomation_DE.LoadInfo(cardDataList);
+		}
+		else if(Input.GetMouseButtonDown(0))
+		{
+			Debug.Log("Add");
+			//何も押さないとデッキにカード追加として扱う
+			//deck_DE.Add(cardDataList);
+		}
 	}
 
 	//DeckGeneraterの中でしか起こらないのでレベルに対応したBp変化はいらない

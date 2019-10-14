@@ -778,7 +778,7 @@ RectTransform:
   - {fileID: 1670096643}
   - {fileID: 2066182773}
   m_Father: {fileID: 1998338579}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -928,7 +928,7 @@ RectTransform:
   - {fileID: 1718446999}
   - {fileID: 1563901273}
   m_Father: {fileID: 1998338579}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1171,8 +1171,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000015259, y: -19.272}
-  m_SizeDelta: {x: 662, y: 294.36}
+  m_AnchoredPosition: {x: 2.47, y: -19.272}
+  m_SizeDelta: {x: 657.05, y: 294.36}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &516223861
 MonoBehaviour:
@@ -1516,12 +1516,12 @@ RectTransform:
   - {fileID: 516223860}
   - {fileID: 1044142853}
   m_Father: {fileID: 1998338579}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -254.40002, y: -86.481}
-  m_SizeDelta: {x: -508.8, y: -172.99}
+  m_AnchoredPosition: {x: -254.39001, y: -86.481}
+  m_SizeDelta: {x: -508.83, y: -172.99}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &724498773
 MonoBehaviour:
@@ -2109,7 +2109,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5.6469e-13, y: 0.000030517578}
+  m_AnchoredPosition: {x: 0, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &943989081
@@ -2271,7 +2271,7 @@ RectTransform:
   - {fileID: 689399727}
   - {fileID: 764742195}
   m_Father: {fileID: 1998338579}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2960,7 +2960,7 @@ GameObject:
   - component: {fileID: 1241353282}
   - component: {fileID: 1241353281}
   m_Layer: 5
-  m_Name: CardRarityPanel
+  m_Name: CardSectionPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2979,11 +2979,11 @@ RectTransform:
   m_Children:
   - {fileID: 1421857882}
   m_Father: {fileID: 1998338579}
-  m_RootOrder: 8
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -154.41998, y: 221.74}
+  m_AnchoredPosition: {x: -154.41992, y: 221.73996}
   m_SizeDelta: {x: -1109.6, y: -443.44}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1241353281
@@ -3263,7 +3263,7 @@ RectTransform:
   - {fileID: 1590961745}
   - {fileID: 1183537172}
   m_Father: {fileID: 1998338579}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3625,7 +3625,7 @@ GameObject:
   - component: {fileID: 1421857884}
   - component: {fileID: 1421857883}
   m_Layer: 5
-  m_Name: CardDivision
+  m_Name: CardSection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3683,7 +3683,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: "\u9032"
 --- !u!222 &1421857884
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3899,7 +3899,7 @@ RectTransform:
   - {fileID: 1622749879}
   - {fileID: 1305861260}
   m_Father: {fileID: 1998338579}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4193,8 +4193,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000026221, y: -19.272}
-  m_SizeDelta: {x: 502.3, y: 289.06}
+  m_AnchoredPosition: {x: 1.81, y: -19.272}
+  m_SizeDelta: {x: 498.67, y: 289.06}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1590961746
 MonoBehaviour:
@@ -5315,6 +5315,7 @@ GameObject:
   - component: {fileID: 1998338582}
   - component: {fileID: 1998338581}
   - component: {fileID: 1998338580}
+  - component: {fileID: 1998338583}
   m_Layer: 5
   m_Name: Infomation
   m_TagString: Untagged
@@ -5335,13 +5336,13 @@ RectTransform:
   m_Children:
   - {fileID: 104365783}
   - {fileID: 446014398}
+  - {fileID: 1241353280}
   - {fileID: 988302554}
   - {fileID: 1542484881}
   - {fileID: 428742668}
   - {fileID: 299896616}
   - {fileID: 724498772}
   - {fileID: 1302648085}
-  - {fileID: 1241353280}
   m_Father: {fileID: 211062071}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5419,6 +5420,29 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.ScrollRect+ScrollRectEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &1998338583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998338578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37c90ec1065d86b49a19b7273d6da3a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: {fileID: 1715342950}
+  section: {fileID: 1421857883}
+  color: {fileID: 689399728}
+  race1: {fileID: 175996840}
+  race2: {fileID: 1305861261}
+  cp: {fileID: 1718447000}
+  bp1: {fileID: 1183562906}
+  bp2: {fileID: 280547768}
+  bp3: {fileID: 1932594882}
+  effect: {fileID: 516223861}
+  flavor: {fileID: 1590961746}
 --- !u!1 &2066182772
 GameObject:
   m_ObjectHideFlags: 0
