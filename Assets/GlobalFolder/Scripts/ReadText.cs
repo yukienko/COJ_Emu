@@ -34,7 +34,7 @@ public class ReadText : MonoBehaviour
             for (int n = 0; n < columnLength; n++)
             {
                 textWords[i, n] = tempWords[n]; //2次配列textWordsにカンマごとに分けたtempWordsを代入していく
-                Debug.Log(textWords[i, n]);
+
             }
         }
     }

@@ -16,8 +16,40 @@ public class CardGenerater_DE : MonoBehaviour
 			GameObject cardObj = Instantiate(cardPrefab);
 			cardObj.name = _cardDataList.name;
 			GameObject cardImage = cardObj.transform.Find("Image").gameObject;
-			cardImagePath = Environment.CurrentDirectory + "\\cardImage\\units\\unit (" + _cardDataList.id.ToString() + ").jpg";
-			Debug.Log(cardImagePath);
+
+		switch (_cardDataList.section)
+		{
+			//ジョーカー
+			case 0:
+
+				break;
+			//ユニット
+			case 1:
+				cardImagePath = Environment.CurrentDirectory + "\\cardImage\\units\\unit (" + _cardDataList.id.ToString() + ").jpg";
+				//Debug.Log(cardImagePath);
+				break;
+			//進化
+			case 2:
+				cardImagePath = Environment.CurrentDirectory + "\\cardImage\\units\\unit (" + _cardDataList.id.ToString() + ").jpg";
+				//Debug.Log(cardImagePath);
+				break;
+			//トリガー
+			case 3:
+				cardImagePath = Environment.CurrentDirectory + "\\cardImage\\triggers\\trigger (" + _cardDataList.id.ToString() + ").jpg";
+				Debug.Log(cardImagePath);
+				break;
+			//インターセプト
+			case 4:
+				cardImagePath = Environment.CurrentDirectory + "\\cardImage\\intercepts\\intercept (" + _cardDataList.id.ToString() + ").jpg";
+				//Debug.Log(cardImagePath);
+				break;
+			//ウイルス
+			case 5:
+				break;
+			//カエル
+			case 6:
+				break;
+		}
 
 			Texture Card_texture = cardImage.GetComponent<Texture>();
 			if (!File.Exists(cardImagePath))
