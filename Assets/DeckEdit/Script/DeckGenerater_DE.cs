@@ -10,10 +10,23 @@ public class DeckGenerater_DE : MonoBehaviour
 	public GameObject cardPrefab;
 	Sprite sprite;
 	string cardImagePath;
-
+	int same = 0;
+	public const int sameCardLimit = 3;
 
 	public void Generate(CardData_DE _cardDataList, Deck_DE _deck)
 	{
+		same = 0;
+		for(int i = 0; i< _deck.cardList.Count; i++)
+		{
+			if(_deck.cardList[i].id == _cardDataList.id)
+				same++;
+		}
+		if (same >= sameCardLimit)
+		{
+			Debug.Log("枚数制限です");
+			return;
+		}
+
 		GameObject cardObj = Instantiate(cardPrefab);
 		cardObj.name = _cardDataList.name;
 		GameObject cardImage = cardObj.transform.Find("Image").gameObject;
