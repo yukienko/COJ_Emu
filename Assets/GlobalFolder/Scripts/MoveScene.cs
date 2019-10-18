@@ -23,8 +23,13 @@ public class MoveScene : MonoBehaviour
         SceneManager.LoadScene("DeckEdit");
     }
 
-    //public void test()
-    //{
-    //    scenemanager.loadscene("test");
-    //}
+	public void MoveToGame()
+	{
+		SceneManager.LoadScene("Game");
+	}
+
+	public void MoveToTitle()
+	{
+		SceneManager.LoadScene("Title");
+	}
 }

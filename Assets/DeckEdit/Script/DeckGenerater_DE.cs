@@ -1,21 +1,22 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 using System.IO;
 using UnityEngine;
+using System;
 
-public class CardGenerater_DE : MonoBehaviour
+public class DeckGenerater_DE : MonoBehaviour
 {
 	public GameObject cardPrefab;
 	Sprite sprite;
 	string cardImagePath;
 
-	public void Generate(CardData_DE _cardDataList, CardList_DE cardList_DE)
-	{
 
-			GameObject cardObj = Instantiate(cardPrefab);
-			cardObj.name = _cardDataList.name;
-			GameObject cardImage = cardObj.transform.Find("Image").gameObject;
+	public void Generate(CardData_DE _cardDataList, Deck_DE _deck)
+	{
+		GameObject cardObj = Instantiate(cardPrefab);
+		cardObj.name = _cardDataList.name;
+		GameObject cardImage = cardObj.transform.Find("Image").gameObject;
 
 		switch (_cardDataList.section)
 		{
@@ -56,25 +57,41 @@ public class CardGenerater_DE : MonoBehaviour
 				break;
 		}
 
-			Texture Card_texture = cardImage.GetComponent<Texture>();
-			if (!File.Exists(cardImagePath))
-			{
-				Debug.Log("error");
-			}
-			else
-			{
-				Card_texture = ReadTexture(cardImagePath, 93, 140);
-			}
-			// テクスチャーを適用
-			cardImage.GetComponent<Renderer>().material.mainTexture = Card_texture;
-			// 下地の色は白にしておく (そうしないと下地の色と乗算みたいになる)
-			cardImage.GetComponent<Renderer>().material.color = Color.white;
-
-
-			Card_DE card = cardObj.GetComponent<Card_DE>();
-			card.Load(_cardDataList);
-			cardList_DE.Add(card);
+		Texture Card_texture = cardImage.GetComponent<Texture>();
+		if (!File.Exists(cardImagePath))
+		{
+			Debug.Log("error");
 		}
+		else
+		{
+			Card_texture = ReadTexture(cardImagePath, 93, 140);
+		}
+		// テクスチャーを適用
+		cardImage.GetComponent<Renderer>().material.mainTexture = Card_texture;
+		// 下地の色は白にしておく (そうしないと下地の色と乗算みたいになる)
+		cardImage.GetComponent<Renderer>().material.color = Color.white;
+
+
+		Card_DE card = cardObj.GetComponent<Card_DE>();
+		card.Load(_cardDataList);
+		_deck.Add(card);
+	}
+
+	public void Delete(CardData_DE _cardDataList, Deck_DE _deck, Transform transform)
+	{
+		int childcount = 0;
+		foreach(Transform obj in _deck.transform.GetComponentInChildren<Transform>())
+		{
+			Debug.Log(obj.name);
+			if(transform == obj.transform)
+			{
+				_deck.Pull(childcount);
+				return;
+			}
+			childcount++;
+		}
+	}
+
 
 	//フォルダ内のJPGを読み込む
 	Texture ReadTexture(string path, int width, int height)
@@ -97,6 +114,18 @@ public class CardGenerater_DE : MonoBehaviour
 
 		return values;
 	}
+
+
+
+	// Start is called before the first frame update
+	void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 }
-
-

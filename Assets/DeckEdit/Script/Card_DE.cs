@@ -15,13 +15,17 @@ public class Card_DE : MonoBehaviour
 	public int[] bp = new int[3];
 	public string effectText;
 	public string flavorText;
-	public Infomation_DE infomation_DE;
-	public Deck_DE deck_DE;
+	Infomation_DE infomation_DE;
+	DeckGenerater_DE deckgenerater_DE;
+	Player_DE player_;
+	Deck_DE deck_DE;
 
 	private void Start()
 	{
 		infomation_DE = GameObject.Find("Infomation").GetComponent<Infomation_DE>();
-		deck_DE = transform.parent.gameObject.GetComponent<Deck_DE>();
+		deckgenerater_DE = GameObject.Find("Deck").GetComponent<DeckGenerater_DE>();
+		player_ = GameObject.Find("Content_Cards").GetComponent<Player_DE>();
+		deck_DE = GameObject.Find("Content_Deck").GetComponent<Deck_DE>();
 	}
 
 	public void MyPointerDownUI()
@@ -30,15 +34,27 @@ public class Card_DE : MonoBehaviour
 		CardData_DE cardDataList = new CardData_DE(id, name, section, cp, color, race[0], race[1], bp[0], bp[1], bp[2], effectText, flavorText);
 		if (Input.GetMouseButtonDown(1))
 		{
+			//左クリックで説明表示
 			Debug.Log("Infomation");
-			//Qキーを押したままだと説明を表示
 			infomation_DE.LoadInfo(cardDataList);
 		}
 		else if(Input.GetMouseButtonDown(0))
 		{
-			Debug.Log("Add");
-			//何も押さないとデッキにカード追加として扱う
-			//deck_DE.Add(cardDataList);
+			//親がContents_Deckなら追加,Contents_Cardなら削除とする
+			if(transform.parent.name == "Content_Cards")
+			{
+				//右クリックでデッキに追加
+				Debug.Log("Add");
+				deckgenerater_DE.Generate(cardDataList, player_.deck_);
+			}
+			else
+			{
+				//右クリックでデッキから削除
+				Debug.Log("Del");
+				deckgenerater_DE.Delete(cardDataList, player_.deck_,transform);
+				GameObject.Destroy(gameObject);
+			}
+
 		}
 	}
 

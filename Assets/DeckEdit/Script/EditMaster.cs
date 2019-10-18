@@ -14,7 +14,7 @@ public class EditMaster : MonoBehaviour
 	public Player_DE player_;
 	public ReadText readText;
 	CardGenerater_DE cardGenerater;
-	Deck_DE deck_;
+	CardList_DE cardList_DE;
 
 
 	// Start is called before the first frame update
@@ -35,7 +35,7 @@ public class EditMaster : MonoBehaviour
 			//CardData_DE(int _id, string _name, int _section, int _cp, int _color, int _race1, int _race2, int _bp1, int _bp2, int _bp3, string _effectText,string _flavorText)
 			CardData_DE generateCardList = new CardData_DE(int.Parse(readText.textWords[i, 0]), readText.textWords[i, 1], int.Parse(readText.textWords[i, 2]), int.Parse(readText.textWords[i, 3]), int.Parse(readText.textWords[i, 4]), int.Parse(readText.textWords[i, 5]), int.Parse(readText.textWords[i, 6]), int.Parse(readText.textWords[i, 7]), int.Parse(readText.textWords[i, 8]), int.Parse(readText.textWords[i, 9]), readText.textWords[i, 10], readText.textWords[i, 11]);
 
-			cardGenerater.Generate(generateCardList, player_.deck_);
+			cardGenerater.Generate(generateCardList, player_.cardList_DE);
 		}
 	}
 

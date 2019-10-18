@@ -28,7 +28,6 @@ public class Infomation_DE : MonoBehaviour
 		ウ,
 		カ,
 	};
-
 	public enum CardRace
 	{
 		なし,
