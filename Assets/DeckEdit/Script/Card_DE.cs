@@ -28,9 +28,16 @@ public class Card_DE : MonoBehaviour
 		deck_DE = GameObject.Find("Content_Deck").GetComponent<Deck_DE>();
 	}
 
+	public void DeckLoad()
+	{
+		CardData_DE cardDataList = new CardData_DE(id, name, section, cp, color, race[0], race[1], bp[0], bp[1], bp[2], effectText, flavorText);
+		//右クリックでデッキに追加
+		Debug.Log("Add");
+		deckgenerater_DE.Generate(cardDataList, player_.deck_);
+	}
+
 	public void MyPointerDownUI()
 	{
-
 		CardData_DE cardDataList = new CardData_DE(id, name, section, cp, color, race[0], race[1], bp[0], bp[1], bp[2], effectText, flavorText);
 		if (Input.GetMouseButtonDown(1))
 		{
@@ -54,8 +61,8 @@ public class Card_DE : MonoBehaviour
 				deckgenerater_DE.Delete(cardDataList, player_.deck_,transform);
 				GameObject.Destroy(gameObject);
 			}
-
 		}
+
 	}
 
 	//DeckGeneraterの中でしか起こらないのでレベルに対応したBp変化はいらない

@@ -91,7 +91,6 @@ public class DeckGenerater_DE : MonoBehaviour
 		// 下地の色は白にしておく (そうしないと下地の色と乗算みたいになる)
 		cardImage.GetComponent<Renderer>().material.color = Color.white;
 
-
 		Card_DE card = cardObj.GetComponent<Card_DE>();
 		card.Load(_cardDataList);
 		_deck.Add(card);
@@ -102,7 +101,6 @@ public class DeckGenerater_DE : MonoBehaviour
 		int childcount = 0;
 		foreach(Transform obj in _deck.transform.GetComponentInChildren<Transform>())
 		{
-			Debug.Log(obj.name);
 			if(transform == obj.transform)
 			{
 				_deck.Pull(childcount);
