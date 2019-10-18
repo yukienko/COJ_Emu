@@ -11,10 +11,16 @@ public class DeckGenerater_DE : MonoBehaviour
 	Sprite sprite;
 	string cardImagePath;
 	int same = 0;
-	public const int sameCardLimit = 3;
+	private const int sameCardLimit = 3;
+	private const int deckCardLimit = 40;
 
 	public void Generate(CardData_DE _cardDataList, Deck_DE _deck)
 	{
+		if(_deck.cardList.Count >= deckCardLimit)
+		{
+			Debug.Log("デッキは40枚にしてください");
+			return;
+		}
 		same = 0;
 		for(int i = 0; i< _deck.cardList.Count; i++)
 		{
@@ -23,9 +29,10 @@ public class DeckGenerater_DE : MonoBehaviour
 		}
 		if (same >= sameCardLimit)
 		{
-			Debug.Log("枚数制限です");
+			Debug.Log("同じカードは3枚までです");
 			return;
 		}
+		
 
 		GameObject cardObj = Instantiate(cardPrefab);
 		cardObj.name = _cardDataList.name;
