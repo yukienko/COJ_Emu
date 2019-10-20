@@ -19,7 +19,6 @@ public class Cp : MonoBehaviour
 		//リストへ子を格納
 		foreach(Transform g in activeCp.transform.GetComponentInChildren<Transform>())
 		{
-			Debug.Log(g.name);
 			activeCpList.Add(g);
 		}
 		foreach (Transform g in unActiveCp.transform.GetComponentInChildren<Transform>())
