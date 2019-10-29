@@ -15,6 +15,7 @@ public class Card_DE : MonoBehaviour
 	public int[] bp = new int[3];
 	public string effectText;
 	public string flavorText;
+	public int useGauge;
 	Infomation_DE infomation_DE;
 	DeckGenerater_DE deckgenerater_DE;
 	Player_DE player_;
@@ -81,4 +82,14 @@ public class Card_DE : MonoBehaviour
 		effectText = _cardData.effectText;
 		flavorText = _cardData.flavorText;
 	}
+
+	public void LoadJoker(JokerData_DE _cardData)
+	{
+		id = _cardData.id;
+		name = _cardData.name;
+		cp = _cardData.cp;
+		effectText = _cardData.effectText;
+		useGauge = _cardData.useGauge;
+	}
+
 }

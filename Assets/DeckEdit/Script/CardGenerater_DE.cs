@@ -76,6 +76,35 @@ public class CardGenerater_DE : MonoBehaviour
 			cardList_DE.Add(card);
 		}
 
+	public void GenerateJoker(JokerData_DE _cardDataList, JokerList_DE jokerList_DE)
+	{
+
+		GameObject cardObj = Instantiate(cardPrefab);
+		cardObj.name = _cardDataList.name;
+		GameObject cardImage = cardObj.transform.Find("Image").gameObject;
+
+		cardImagePath = Environment.CurrentDirectory + "\\cardImage\\jokers\\joker (" + _cardDataList.id.ToString() + ").jpg";
+
+		Texture Card_texture = cardImage.GetComponent<Texture>();
+		if (!File.Exists(cardImagePath))
+		{
+			Debug.Log("error");
+		}
+		else
+		{
+			Card_texture = ReadTexture(cardImagePath, 93, 140);
+		}
+		// テクスチャーを適用
+		cardImage.GetComponent<Renderer>().material.mainTexture = Card_texture;
+		// 下地の色は白にしておく (そうしないと下地の色と乗算みたいになる)
+		cardImage.GetComponent<Renderer>().material.color = Color.white;
+
+
+		Card_DE card = cardObj.GetComponent<Card_DE>();
+		card.LoadJoker(_cardDataList);
+		jokerList_DE.Add(card);
+	}
+
 	//フォルダ内のJPGを読み込む
 	Texture ReadTexture(string path, int width, int height)
 	{
