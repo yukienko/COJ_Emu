@@ -19,11 +19,6 @@ public class CardGenerater_DE : MonoBehaviour
 
 		switch (_cardDataList.section)
 		{
-			//ジョーカー
-			case 0:
-				cardImagePath = Environment.CurrentDirectory + "\\cardImage\\jokers\\joker (" + _cardDataList.id.ToString() + ").jpg";
-				//Debug.Log(cardImagePath);
-				break;
 			//ユニット
 			case 1:
 				cardImagePath = Environment.CurrentDirectory + "\\cardImage\\units\\unit (" + _cardDataList.id.ToString() + ").jpg";

@@ -31,8 +31,8 @@ public class EditMaster_Joker : MonoBehaviour
 		{
 			//クリックされたときに呼び出す。
 			//カードの表示だけ行う
-			//CardData_DE(int _id, string _name, int _section, int _cp, int _color, int _race1, int _race2, int _bp1, int _bp2, int _bp3, string _effectText,string _flavorText)
-			JokerData_DE generateJokerList = new JokerData_DE(int.Parse(readText_Joker.textWords[i, 0]), readText_Joker.textWords[i, 1], int.Parse(readText_Joker.textWords[i, 2]), readText_Joker.textWords[i, 3], int.Parse(readText_Joker.textWords[i, 4]));
+			//CardData_DE(int _id, string _name, int _section, int _cp, string _effectText, int gauge)
+			JokerData_DE generateJokerList = new JokerData_DE(int.Parse(readText_Joker.textWords[i, 0]), readText_Joker.textWords[i, 1], int.Parse(readText_Joker.textWords[i, 2]), int.Parse(readText_Joker.textWords[i, 3]), readText_Joker.textWords[i, 4], int.Parse(readText_Joker.textWords[i, 5]));
 
 			cardGenerater.GenerateJoker(generateJokerList, player_.JokerList_DE);
 		}

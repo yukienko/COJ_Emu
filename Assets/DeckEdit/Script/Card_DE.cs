@@ -19,14 +19,12 @@ public class Card_DE : MonoBehaviour
 	Infomation_DE infomation_DE;
 	DeckGenerater_DE deckgenerater_DE;
 	Player_DE player_;
-	Deck_DE deck_DE;
 
 	private void Start()
 	{
 		infomation_DE = GameObject.Find("Infomation").GetComponent<Infomation_DE>();
 		deckgenerater_DE = GameObject.Find("Deck").GetComponent<DeckGenerater_DE>();
 		player_ = GameObject.Find("Content_Cards").GetComponent<Player_DE>();
-		deck_DE = GameObject.Find("Content_Deck").GetComponent<Deck_DE>();
 	}
 
 	public void DeckLoad()
@@ -39,31 +37,60 @@ public class Card_DE : MonoBehaviour
 
 	public void MyPointerDownUI()
 	{
-		CardData_DE cardDataList = new CardData_DE(id, name, section, cp, color, race[0], race[1], bp[0], bp[1], bp[2], effectText, flavorText);
-		if (Input.GetMouseButtonDown(1))
+		if (section == 0)
 		{
-			//左クリックで説明表示
-			Debug.Log("Infomation");
-			infomation_DE.LoadInfo(cardDataList);
+			JokerData_DE jokerDataList = new JokerData_DE(id, name, section, cp, effectText, useGauge);
+			if (Input.GetMouseButtonDown(1))
+			{
+				//左クリックで説明表示
+				Debug.Log("Infomation");
+				infomation_DE.LoadInfo_Joker(jokerDataList);
+			}
+			else if (Input.GetMouseButtonDown(0))
+			{
+				//親がContents_Deckなら追加,Contents_Cardなら削除とする
+				if (transform.parent.name == "Content_Jokers")
+				{
+					//右クリックでデッキに追加
+					Debug.Log("Add");
+					deckgenerater_DE.JokerGenerate(jokerDataList, player_.deck_);
+				}
+				else
+				{
+					//右クリックでデッキから削除
+					Debug.Log("Del");
+					deckgenerater_DE.DeleteJoker(jokerDataList, player_.deck_, transform);
+					GameObject.Destroy(gameObject);
+				}
+			}
 		}
-		else if(Input.GetMouseButtonDown(0))
+		else
 		{
-			//親がContents_Deckなら追加,Contents_Cardなら削除とする
-			if(transform.parent.name == "Content_Cards")
+			CardData_DE cardDataList = new CardData_DE(id, name, section, cp, color, race[0], race[1], bp[0], bp[1], bp[2], effectText, flavorText);
+			if (Input.GetMouseButtonDown(1))
 			{
-				//右クリックでデッキに追加
-				Debug.Log("Add");
-				deckgenerater_DE.Generate(cardDataList, player_.deck_);
+				//左クリックで説明表示
+				Debug.Log("Infomation");
+				infomation_DE.LoadInfo(cardDataList);
 			}
-			else
+			else if (Input.GetMouseButtonDown(0))
 			{
-				//右クリックでデッキから削除
-				Debug.Log("Del");
-				deckgenerater_DE.Delete(cardDataList, player_.deck_,transform);
-				GameObject.Destroy(gameObject);
+				//親がContents_Deckなら追加,Contents_Cardなら削除とする
+				if (transform.parent.name == "Content_Cards")
+				{
+					//右クリックでデッキに追加
+					Debug.Log("Add");
+					deckgenerater_DE.Generate(cardDataList, player_.deck_);
+				}
+				else
+				{
+					//右クリックでデッキから削除
+					Debug.Log("Del");
+					deckgenerater_DE.Delete(cardDataList, player_.deck_, transform);
+					GameObject.Destroy(gameObject);
+				}
 			}
 		}
-
 	}
 
 	//DeckGeneraterの中でしか起こらないのでレベルに対応したBp変化はいらない

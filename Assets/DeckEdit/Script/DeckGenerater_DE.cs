@@ -13,6 +13,8 @@ public class DeckGenerater_DE : MonoBehaviour
 	int same = 0;
 	private const int sameCardLimit = 3;
 	private const int deckCardLimit = 40;
+	private const int sameJokerLimit = 1;
+	private const int deckJKokerLimit = 2;
 
 	public void Generate(CardData_DE _cardDataList, Deck_DE _deck)
 	{
@@ -96,20 +98,53 @@ public class DeckGenerater_DE : MonoBehaviour
 		_deck.Add(card);
 	}
 
-	public void Delete(CardData_DE _cardDataList, Deck_DE _deck, Transform transform)
+	public void JokerGenerate(JokerData_DE _jokerDataList, Deck_DE _deck)
+	{
+		if (_deck.jokerList.Count >= deckJKokerLimit)
+		{
+			Debug.Log("ジョーカーは２枚です");
+			return;
+		}
+		same = 0;
+		for (int i = 0; i < _deck.jokerList.Count; i++)
+		{
+			if (_deck.jokerList[i].id == _jokerDataList.id)
+				same++;
+		}
+		if (same >= sameJokerLimit)
+		{
+			Debug.Log("同じジョーカーは1枚までです");
+			return;
+		}
+	}
+
+	public void Delete(CardData_DE _cardDataList, Joker_DE _joker, Transform transform)
 	{
 		int childcount = 0;
-		foreach(Transform obj in _deck.transform.GetComponentInChildren<Transform>())
+		foreach(Transform obj in _joker.transform.GetComponentInChildren<Transform>())
 		{
 			if(transform == obj.transform)
 			{
-				_deck.Pull(childcount);
+				_joker.Pull(childcount);
 				return;
 			}
 			childcount++;
 		}
 	}
 
+	public void DeleteJoker(JokerData_DE _jokerDataList, Joker_DE _joker, Transform transform)
+	{
+		int childcount = 0;
+		foreach (Transform obj in _joker.transform.GetComponentInChildren<Transform>())
+		{
+			if (transform == obj.transform)
+			{
+				_joker.Pull(childcount);
+				return;
+			}
+			childcount++;
+		}
+	}
 
 	//フォルダ内のJPGを読み込む
 	Texture ReadTexture(string path, int width, int height)

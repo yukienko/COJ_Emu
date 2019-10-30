@@ -17,6 +17,7 @@ public class Infomation_DE : MonoBehaviour
 	public Text bp3;
 	public Text effect;
 	public Text flavor;
+	public Text gauge;
 
 	enum Section
 	{
@@ -65,12 +66,30 @@ public class Infomation_DE : MonoBehaviour
 		紫
 	};
 
+
+	public void LoadInfo_Joker(JokerData_DE jokerData_DE)
+	{
+		name.text = jokerData_DE.name;
+
+		for (int i = 0; i < Enum.GetNames(typeof(Section)).Length; i++)
+		{
+			if (jokerData_DE.section == i)
+			{
+				Section _section = (Section)Enum.ToObject(typeof(Section), i);
+				section.text = _section.ToString();
+			}
+		}
+		cp.text = jokerData_DE.cp.ToString();
+		effect.text = jokerData_DE.effectText;
+
+	}
+
 	public void LoadInfo(CardData_DE cardData_DE)
 	{
 		name.text = cardData_DE.name;
-		for(int i = 0; i < Enum.GetNames(typeof(Section)).Length; i++)
+		for (int i = 0; i < Enum.GetNames(typeof(Section)).Length; i++)
 		{
-			if(cardData_DE.section == i)
+			if (cardData_DE.section == i)
 			{
 				Section _section = (Section)Enum.ToObject(typeof(Section), i);
 				section.text = _section.ToString();

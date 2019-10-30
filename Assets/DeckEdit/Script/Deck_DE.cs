@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class Deck_DE : MonoBehaviour
 {
 	public List<Card_DE> cardList = new List<Card_DE>();
+	public List<Card_DE> jokerList = new List<Card_DE>();
 	public List<Transform> cardsChildren = new List<Transform>();
 	public List<Transform> objList;
 	public GameObject savePanel;
