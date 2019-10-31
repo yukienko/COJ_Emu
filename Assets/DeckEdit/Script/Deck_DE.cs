@@ -10,7 +10,6 @@ using UnityEngine.UI;
 public class Deck_DE : MonoBehaviour
 {
 	public List<Card_DE> cardList = new List<Card_DE>();
-	public List<Card_DE> jokerList = new List<Card_DE>();
 	public List<Transform> cardsChildren = new List<Transform>();
 	public List<Transform> objList;
 	public GameObject savePanel;
@@ -54,15 +53,21 @@ public class Deck_DE : MonoBehaviour
 		//デッキ枚数が40枚か
 		if (cardList.Count == deckCardLimit)
 		{
-			//DeckSort();
+			//deckFilePathの作製
 			string deckFilePath = Environment.CurrentDirectory + "\\deckFile";
+
+			//deckFileがなければ作りましょう
 			if (!Directory.Exists(deckFilePath))
 			{
 				Directory.CreateDirectory(deckFilePath);	
 			}
+
+			//ここはDeck_DEなのでデッキのパスから読み取ります
 			deckFilePath = deckFilePath + "\\" + deckName.text + ".txt";
 			//var info = "DeckName:" + deckName.text;
 			//File.WriteAllText(deckFilePath, info + "\n");
+
+			//
 			for (int i = 0; i < cardList.Count; i++)
 			{
 				var stream = cardList[i].name.ToString() + "\n";
@@ -94,6 +99,7 @@ public class Deck_DE : MonoBehaviour
 
 	public void DeckLoad()
 	{
+		//カードのロード
 		//残っているカードを「全削除
 		cardList.Clear();
 		foreach(Transform t in gameObject.transform)
@@ -101,16 +107,17 @@ public class Deck_DE : MonoBehaviour
 			GameObject.Destroy(t.gameObject);
 		}
 
-		string deckFilePath = Environment.CurrentDirectory + "\\deckFile";
 		//選んだデッキの名前はここに
 		string deckname = selectDeckName.text;
-		deckFilePath = deckFilePath + "\\" + deckname + ".txt";
-		if (!File.Exists(deckFilePath))
+		string deckFilePath = Environment.CurrentDirectory + "\\deckFile\\" + deckname + ".txt";
+		
+		var cardPath = deckFilePath + "\\Cards.txt";
+		if (!File.Exists(cardPath))
 		{
-			Debug.Log("error" + deckFilePath);
+			Debug.Log("error" + cardPath);
 			return;
 		}
-		string[] deckList = File.ReadAllLines(deckFilePath);
+		string[] deckList = File.ReadAllLines(cardPath);
 		//cardsChildrenにカードリストからカードをすべて取得
 		foreach (Transform card in content_Card.transform.GetComponentInChildren<Transform>())
 		{
