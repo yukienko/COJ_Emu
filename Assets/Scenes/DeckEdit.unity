@@ -710,6 +710,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb809e760bfd81143b3fd039df6a92f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jokerList: []
+  cardsChildren: []
+  objList: []
+  content_Card: {fileID: 0}
+  selectDeck: {fileID: 0}
+  selectDeckView: {fileID: 0}
+  deckName: {fileID: 0}
+  selectDeckName: {fileID: 0}
 --- !u!1 &211062067
 GameObject:
   m_ObjectHideFlags: 0
@@ -2765,7 +2773,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 65, y: 95}
@@ -3540,7 +3548,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 540.0499}
+  m_AnchoredPosition: {x: 0, y: 540.0498}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &943989081
@@ -3635,7 +3643,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deck_: {fileID: 2077502042}
   cardList_DE: {fileID: 943989083}
-  joker_DE: {fileID: 201395398}
+  joker_DE: {fileID: 0}
   JokerList_DE: {fileID: 805458762}
 --- !u!222 &943989087
 CanvasRenderer:
@@ -4380,7 +4388,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 635467641}
   m_Direction: 2
   m_Value: 1
-  m_Size: 1
+  m_Size: 0.9937343
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7034,6 +7042,7 @@ GameObject:
   - component: {fileID: 1769313278}
   - component: {fileID: 1769313277}
   - component: {fileID: 1769313276}
+  - component: {fileID: 1769313279}
   m_Layer: 5
   m_Name: changeCard_Joker
   m_TagString: Untagged
@@ -7115,12 +7124,12 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
+      - m_Target: {fileID: 1769313279}
+        m_MethodName: ViewChange
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -7165,6 +7174,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1769313274}
   m_CullTransparentMesh: 0
+--- !u!114 &1769313279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1769313274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e8bc209a9987544d8add3d535e6dc42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropdown: {fileID: 1769313276}
+  Card: {fileID: 943989079}
 --- !u!1 &1795659361
 GameObject:
   m_ObjectHideFlags: 0
@@ -7632,7 +7655,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.0000076293945}
   m_SizeDelta: {x: 0, y: 28}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1932594880
@@ -8307,7 +8330,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardList: []
-  jokerList: []
   cardsChildren: []
   objList: []
   savePanel: {fileID: 635165186}
@@ -8476,7 +8498,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 37330052}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.9999998
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

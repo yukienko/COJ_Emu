@@ -18,13 +18,15 @@ public class Card_DE : MonoBehaviour
 	public int useGauge;
 	Infomation_DE infomation_DE;
 	DeckGenerater_DE deckgenerater_DE;
-	Player_DE player_;
+	Player_DE player_c;
+	Player_DE player_j;
 
 	private void Start()
 	{
 		infomation_DE = GameObject.Find("Infomation").GetComponent<Infomation_DE>();
 		deckgenerater_DE = GameObject.Find("Deck").GetComponent<DeckGenerater_DE>();
-		player_ = GameObject.Find("Content_Cards").GetComponent<Player_DE>();
+		player_c = GameObject.Find("Content_Cards").GetComponent<Player_DE>();
+		player_j = GameObject.Find("Content_Jokers").GetComponent<Player_DE>();
 	}
 
 	public void DeckLoad()
@@ -32,11 +34,12 @@ public class Card_DE : MonoBehaviour
 		CardData_DE cardDataList = new CardData_DE(id, name, section, cp, color, race[0], race[1], bp[0], bp[1], bp[2], effectText, flavorText);
 		//右クリックでデッキに追加
 		Debug.Log("Add");
-		deckgenerater_DE.Generate(cardDataList, player_.deck_);
+		deckgenerater_DE.Generate(cardDataList, player_c.deck_);
 	}
 
 	public void MyPointerDownUI()
 	{
+		//押したカードがジョーカーだった
 		if (section == 0)
 		{
 			JokerData_DE jokerDataList = new JokerData_DE(id, name, section, cp, effectText, useGauge);
@@ -53,17 +56,18 @@ public class Card_DE : MonoBehaviour
 				{
 					//右クリックでデッキに追加
 					Debug.Log("Add");
-					deckgenerater_DE.JokerGenerate(jokerDataList, player_.deck_);
+					deckgenerater_DE.JokerGenerate(jokerDataList, player_j.joker_DE);
 				}
 				else
 				{
 					//右クリックでデッキから削除
 					Debug.Log("Del");
-					deckgenerater_DE.DeleteJoker(jokerDataList, player_.deck_, transform);
+					deckgenerater_DE.DeleteJoker(jokerDataList, player_j.joker_DE, transform);
 					GameObject.Destroy(gameObject);
 				}
 			}
 		}
+		//押したカードがユニットなどのカードだった
 		else
 		{
 			CardData_DE cardDataList = new CardData_DE(id, name, section, cp, color, race[0], race[1], bp[0], bp[1], bp[2], effectText, flavorText);
@@ -80,13 +84,13 @@ public class Card_DE : MonoBehaviour
 				{
 					//右クリックでデッキに追加
 					Debug.Log("Add");
-					deckgenerater_DE.Generate(cardDataList, player_.deck_);
+					deckgenerater_DE.Generate(cardDataList, player_c.deck_);
 				}
 				else
 				{
 					//右クリックでデッキから削除
 					Debug.Log("Del");
-					deckgenerater_DE.Delete(cardDataList, player_.deck_, transform);
+					deckgenerater_DE.Delete(cardDataList, player_c.deck_, transform);
 					GameObject.Destroy(gameObject);
 				}
 			}
