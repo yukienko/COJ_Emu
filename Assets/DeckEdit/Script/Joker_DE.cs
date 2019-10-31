@@ -10,14 +10,8 @@ public class Joker_DE : MonoBehaviour
 {
 	public List<Card_DE> jokerList = new List<Card_DE>();
 	public List<Transform> cardsChildren = new List<Transform>();
-	public List<Transform> objList;
-	public GameObject content_Card; 
-	public GameObject selectDeck;
-	public GameObject selectDeckView;
-	public Text deckName;
-	public Text selectDeckName;
-	public string[,] textMessage;
-	private const int deckCardLimit = 40;
+	public GameObject content_Joker; 
+	private const int deckjokerLimit = 2;
 
 
 	public void Add(Card_DE _card)
@@ -34,49 +28,26 @@ public class Joker_DE : MonoBehaviour
 		return card;
 	}
 
-	public void DeckSave()
+	public void JokerSave(string deckFilePath)
 	{
-		//デッキ枚数が40枚か
-		if (jokerList.Count == deckCardLimit)
+		//ジョーカーが2枚か
+		if (jokerList.Count == deckjokerLimit)
 		{
-			//DeckSort();
-			string deckFilePath = Environment.CurrentDirectory + "\\deckFile";
-			if (!Directory.Exists(deckFilePath))
-			{
-				Directory.CreateDirectory(deckFilePath);
-			}
-			deckFilePath = deckFilePath + "\\" + deckName.text + ".txt";
-			//var info = "DeckName:" + deckName.text;
-			//File.WriteAllText(deckFilePath, info + "\n");
+			var deckFileJokerPath = deckFilePath + "\\joker.txt";
+
+			//一回全部消す
+			File.Delete(deckFileJokerPath);
+
 			for (int i = 0; i < jokerList.Count; i++)
 			{
 				var stream = jokerList[i].name.ToString() + "\n";
-				File.AppendAllText(deckFilePath, stream);
+				File.AppendAllText(deckFileJokerPath, stream);
 			}
 		}
-		Debug.Log("SaveOK");
+		Debug.Log("JokerSaveOK");
 	}
 
-	public void DeckSort()
-	{
-		IOrderedEnumerable<Card_DE> sortList = jokerList.OrderBy(b => b.section).ThenBy(a => a.id);
-		var count = jokerList.Count;
-		Debug.Log(sortList.Count());
-		foreach (Card_DE card in sortList)
-		{
-			jokerList.Add(card);
-		}
-		jokerList.RemoveRange(0, count);
-
-		objList = jokerList.ConvertAll(x => x.transform.GetComponentInChildren<Transform>());
-
-		foreach (var obj in objList)
-		{
-			obj.SetSiblingIndex(jokerList.Count - 1);
-		}
-	}
-
-	public void DeckLoad()
+	public void JokerLoad(string deckFilePath)
 	{
 		//残っているカードを「全削除
 		jokerList.Clear();
@@ -85,34 +56,27 @@ public class Joker_DE : MonoBehaviour
 			GameObject.Destroy(t.gameObject);
 		}
 
-		string deckFilePath = Environment.CurrentDirectory + "\\deckFile";
-		//選んだデッキの名前はここに
-		string deckname = selectDeckName.text;
-		deckFilePath = deckFilePath + "\\" + deckname + ".txt";
-		if (!File.Exists(deckFilePath))
-		{
-			Debug.Log("error" + deckFilePath);
-			return;
-		}
-		string[] deckList = File.ReadAllLines(deckFilePath);
+		var jokerPath = deckFilePath + "\\joker.txt";
+		string[] deckList = File.ReadAllLines(jokerPath);
 		//cardsChildrenにカードリストからカードをすべて取得
-		foreach (Transform card in content_Card.transform.GetComponentInChildren<Transform>())
+		foreach (Transform card in content_Joker.transform.GetComponentInChildren<Transform>())
 		{
 			cardsChildren.Add(card);
 		}
 		foreach (string s in deckList)
 		{
-			FromNameCardLoad(s);
+			FromNameJokerLoad(s);
 		}
+		Debug.Log("JokerLoadOK");
 	}
 
-	void FromNameCardLoad(string s)
+	void FromNameJokerLoad(string s)
 	{
-		for (int i = 0; i < content_Card.transform.childCount; i++)
+		for (int i = 0; i < content_Joker.transform.childCount; i++)
 		{
 			if (s == cardsChildren[i].GetComponent<Card_DE>().name)
 			{
-				cardsChildren[i].GetComponent<Card_DE>().DeckLoad();
+				cardsChildren[i].GetComponent<Card_DE>().DeckLoad_Joker();
 				break;
 			}
 		}

@@ -29,12 +29,23 @@ public class Card_DE : MonoBehaviour
 		player_j = GameObject.Find("Content_Jokers").GetComponent<Player_DE>();
 	}
 
+	//カードをDeckGenerater_DEを使ってデッキに追加する。
 	public void DeckLoad()
 	{
 		CardData_DE cardDataList = new CardData_DE(id, name, section, cp, color, race[0], race[1], bp[0], bp[1], bp[2], effectText, flavorText);
 		//右クリックでデッキに追加
-		Debug.Log("Add");
+		Debug.Log("Load:Card_" + cardDataList.name);
 		deckgenerater_DE.Generate(cardDataList, player_c.deck_);
+	}
+
+	//ジョーカーをDeckGenerater_DEを使ってデッキに追加する.
+	public void DeckLoad_Joker()
+	{
+		JokerData_DE jokerDataList = new JokerData_DE(id, name, section, cp, effectText, useGauge);
+		//ジョーカー追加
+		Debug.Log("Load:Joker_" + jokerDataList.name);
+		deckgenerater_DE.JokerGenerate(jokerDataList, player_j.joker_DE);
+
 	}
 
 	public void MyPointerDownUI()
