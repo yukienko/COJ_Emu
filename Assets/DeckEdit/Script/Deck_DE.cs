@@ -22,7 +22,7 @@ public class Deck_DE : MonoBehaviour
 	public Text selectDeckName;
 	private const int deckCardLimit = 40;
 
-
+	//デッキにカードを追加する
 	public void Add(Card_DE _card)
 	{
 		//GameObject deck = this.transform.Find("Content_Deck").gameObject;
@@ -30,6 +30,7 @@ public class Deck_DE : MonoBehaviour
 		cardList.Add(_card);
 	}
 
+	//デッキからカードを抜く
 	public Card_DE Pull(int _position)
 	{
 		Card_DE card = cardList[_position];
@@ -37,26 +38,34 @@ public class Deck_DE : MonoBehaviour
 		return card;
 	}
 
+	//セーブパネルの表示
 	public void DeckSavePanel_Active()
 	{
 		deckName.text = "";
 		savePanel.gameObject.SetActive(true);
 	}
 
+	//セーブパネルの非表示
 	public void DeckSavePanel_UnActive()
 	{
 		savePanel.gameObject.SetActive(false);
 	}
 
+	//デッキのセーブ
 	public void DeckSave()
 	{
 		//デッキ枚数が40枚か
 		if (cardList.Count == deckCardLimit)
 		{
 			//deckFilePathの作製
-
-			//セーブするフォルダの名前
 			string deckFilePath = Environment.CurrentDirectory + "\\deckFile\\" + deckName.text;
+
+			//ジョーカーのセーブ
+			if (!joker_.JokerSave(deckFilePath))
+			{
+				//ジョーカーが2枚未満
+				return;
+			}
 
 			//deckFileがなければ作りましょう
 			if (!Directory.Exists(deckFilePath))
@@ -75,9 +84,6 @@ public class Deck_DE : MonoBehaviour
 				var stream = cardList[i].name.ToString() + "\n";
 				File.AppendAllText(deckFileCardPath, stream);
 			}
-
-			//ジョーカーのセーブもここから呼ぶ
-			joker_.JokerSave(deckFilePath);
 		}
 		else
 		{
@@ -89,6 +95,7 @@ public class Deck_DE : MonoBehaviour
 		DeckSavePanel_UnActive();
 	}
 
+	//デッキソート
 	public void DeckSort()
 	{
 		IOrderedEnumerable<Card_DE> sortList = cardList.OrderBy(b => b.section).ThenBy(a => a.id);
@@ -108,6 +115,7 @@ public class Deck_DE : MonoBehaviour
 		}
 	}
 
+	//デッキロード
 	public void DeckLoad()
 	{
 		//カードのロード
@@ -144,6 +152,7 @@ public class Deck_DE : MonoBehaviour
 		DeckLoadPanel_UnActive();
 	}
 
+	//DeckFileのカード名からゲーム画面右のカードリストから同じ名前のカードを探してその情報をロードする
 	void FromNameCardLoad(string s)
 	{
 		for (int i = 0; i < content_Card.transform.childCount; i++)
@@ -156,11 +165,13 @@ public class Deck_DE : MonoBehaviour
 		}
 	}
 
+	//ロードパネル表示
 	public void DeckLoadPanel_Active()
 	{
 		loadPanel.gameObject.SetActive(true);
 	}
 
+	//ロードパネル非表示
 	public void DeckLoadPanel_UnActive()
 	{
 		loadPanel.gameObject.SetActive(false);

@@ -28,12 +28,18 @@ public class Joker_DE : MonoBehaviour
 		return card;
 	}
 
-	public void JokerSave(string deckFilePath)
+	public bool JokerSave(string deckFilePath)
 	{
 		//ジョーカーが2枚か
 		if (jokerList.Count == deckjokerLimit)
 		{
 			var deckFileJokerPath = deckFilePath + "\\joker.txt";
+
+			//deckFileがなければ作りましょう
+			if (!Directory.Exists(deckFilePath))
+			{
+				Directory.CreateDirectory(deckFilePath);
+			}
 
 			//一回全部消す
 			File.Delete(deckFileJokerPath);
@@ -43,8 +49,16 @@ public class Joker_DE : MonoBehaviour
 				var stream = jokerList[i].name.ToString() + "\n";
 				File.AppendAllText(deckFileJokerPath, stream);
 			}
+
+			Debug.Log("JokerSaveOK");
+			return true;
 		}
-		Debug.Log("JokerSaveOK");
+		//ジョーカーが規定枚数に達していないのでエラーを返す
+		else
+		{
+			Debug.Log("error:ジョーカーが2枚未満");
+			return false;
+		}
 	}
 
 	public void JokerLoad(string deckFilePath)
