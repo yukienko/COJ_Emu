@@ -67,12 +67,6 @@ public class Deck_DE : MonoBehaviour
 				return;
 			}
 
-			//deckFileがなければ作りましょう
-			if (!Directory.Exists(deckFilePath))
-			{
-				Directory.CreateDirectory(deckFilePath);	
-			}
-
 			//ここはDeck_DEなのでデッキのパスから
 			var deckFileCardPath = deckFilePath + "\\card.txt";
 

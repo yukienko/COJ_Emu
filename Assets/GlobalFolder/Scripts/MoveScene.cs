@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 
 public class MoveScene : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+	public Text Loading;
+	private string loading = "Now Loading";
+	// Start is called before the first frame update
+	void Start()
     {
         
     }
@@ -20,16 +22,19 @@ public class MoveScene : MonoBehaviour
 
     public void MoveToDeckEdit()
     {
-        SceneManager.LoadScene("DeckEdit");
-    }
+		Loading.text = loading;
+		SceneManager.LoadScene("DeckEdit");
+	}
 
 	public void MoveToGame()
 	{
+		Loading.text = loading;
 		SceneManager.LoadScene("Game");
 	}
 
 	public void MoveToTitle()
 	{
+		Loading.text = loading;
 		SceneManager.LoadScene("Title");
 	}
 }
