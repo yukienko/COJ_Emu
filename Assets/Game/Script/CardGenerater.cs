@@ -1,45 +1,21 @@
-﻿/*
-
-Cardより受け取った情報をもとにカードの生成を行い、デッキに追加する。
-
- */
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class DeckGenerater : MonoBehaviour
+public class CardGenerater : MonoBehaviour
 {
+
 	public GameObject cardPrefab;
 	Sprite sprite;
 	string cardImagePath;
-	private const int sameCardLimit = 3;
-	private const int deckCardLimit = 40;
-	int same = 0;
 
 
-	public void Generate(CardData _cardDataList, Deck _deck)
+	//GameMsterからカードの生成で呼ばれる
+	public void Generate(CardData _cardDataList, CardList cardList)
 	{
-		//このデッキデータが対戦で使えるかどうか判別
-		if (_deck.cardList.Count != deckCardLimit)
-		{
-			Debug.Log("error:デッキのカード枚数がおかしいです。");
-			return;
-		}
-		same = 0;
-		for (int i = 0; i < _deck.cardList.Count; i++)
-		{
-			if (_deck.cardList[i].id == _cardDataList.id)
-				same++;
-		}
-		if (same >= sameCardLimit)
-		{
-			Debug.Log("同じカードは3枚までです");
-			return;
-		}
 
-		//カードのもとを生成してここからプレイヤーが判別できるように情報を加えていく
 		GameObject cardObj = Instantiate(cardPrefab);
 		cardObj.name = _cardDataList.name;
 		GameObject cardImage = cardObj.transform.Find("Image").gameObject;
@@ -78,7 +54,6 @@ public class DeckGenerater : MonoBehaviour
 				break;
 		}
 
-		//テクスチャにフォルダから読み込んだ画像を張る
 		Texture Card_texture = cardImage.GetComponent<Texture>();
 		if (!File.Exists(cardImagePath))
 		{
@@ -88,15 +63,15 @@ public class DeckGenerater : MonoBehaviour
 		{
 			Card_texture = ReadTexture(cardImagePath, 93, 140);
 		}
-
 		// テクスチャーを適用
 		cardImage.GetComponent<Renderer>().material.mainTexture = Card_texture;
 		// 下地の色は白にしておく (そうしないと下地の色と乗算みたいになる)
 		cardImage.GetComponent<Renderer>().material.color = Color.white;
 
+
 		Card card = cardObj.GetComponent<Card>();
 		card.Load(_cardDataList);
-		_deck.Add(card);
+		cardList.Add(card);
 	}
 
 	//フォルダ内のJPGを読み込む
@@ -120,4 +95,16 @@ public class DeckGenerater : MonoBehaviour
 
 		return values;
 	}
+
+	// Start is called before the first frame update
+	void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 }

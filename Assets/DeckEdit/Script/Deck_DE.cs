@@ -127,7 +127,7 @@ public class Deck_DE : MonoBehaviour
 		var cardPath = deckFilePath + "\\card.txt";
 		if (!File.Exists(cardPath))
 		{
-			Debug.Log("error" + cardPath);
+			Debug.Log("error:" + cardPath + "が存在しません");
 			return;
 		}
 		string[] deckList = File.ReadAllLines(cardPath);

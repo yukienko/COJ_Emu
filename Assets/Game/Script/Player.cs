@@ -6,14 +6,15 @@ public class Player : MonoBehaviour
 {
     public Hand hand;
     public Field field;
-    public Deck deck;
+    public Deck deck_;
     public Sutehuda sutehuda;
     public TurnTimer timer;
+	public CardList cardList;
 
-    public void Draw()
+	public void Draw()
     {
         //デッキの何番目のカードを対象に
-        Card card = deck.Pull(0);
+        Card card = deck_.Pull(0);
         //手札に移動
         hand.Add(card);
     }

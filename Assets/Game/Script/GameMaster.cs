@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class GameMaster : MonoBehaviour
 {
-    public Player[] playerList;
-    DeckGenerater deckGenerater;
+    public Player player;
+	public ReadText readText;
+	DeckGenerater deckGenerater;
+	CardGenerater cardGenerater;
 
-    enum Phase
+	enum Phase
     {
         INIT,
         DRAW,
@@ -21,8 +23,22 @@ public class GameMaster : MonoBehaviour
     {
         deckGenerater = GetComponent<DeckGenerater>();
         phase = Phase.INIT;
-    }
-    void Update()
+
+		//CardDataからすべてのカードを一度生成する
+		cardGenerater = GetComponent<CardGenerater>();
+
+		//CardDataの存在する枚数分繰り返す
+		for (int i = 0; i < readText.textWords.GetLength(0); i++)
+		{
+			//クリックされたときに呼び出す。
+			//カードの表示だけ行う
+			//CardData_DE(int _id, string _name, int _section, int _cp, int _color, int _race1, int _race2, int level, int _bp1, int _bp2, int _bp3, string _effectText,string _flavorText)
+			CardData generateCardList = new CardData(int.Parse(readText.textWords[i, 0]), readText.textWords[i, 1], int.Parse(readText.textWords[i, 2]), int.Parse(readText.textWords[i, 3]), int.Parse(readText.textWords[i, 4]), int.Parse(readText.textWords[i, 5]), int.Parse(readText.textWords[i, 6]), int.Parse(readText.textWords[i, 7]), int.Parse(readText.textWords[i, 8]), int.Parse(readText.textWords[i, 9]), readText.textWords[i, 10], readText.textWords[i, 11]);
+
+			cardGenerater.Generate(generateCardList, player.cardList);
+		}
+	}
+	void Update()
     {
         switch (phase)
         {
@@ -44,21 +60,25 @@ public class GameMaster : MonoBehaviour
         }
     }
 
-    //CardData(int _id, string _name, int _cp, int _color, int _race1, int _race2, int _level, int _bp1, int _bp2, int _bp3, string _effectText)
 
-    List<CardData> player1CardDataList = new List<CardData>()
+
+
+
+	//CardData(int _id, string _name, int _cp, int _color, int _race1, int _race2, int _level, int _bp1, int _bp2, int _bp3, string _effectText)
+
+	List<CardData> player1CardDataList = new List<CardData>()
     {
-        new CardData(1,"name0",1,1,1,0,1,1000,2000,3000,"このユニットはテスト用です。効果なんてないよおおおおお"),
-        new CardData(2,"name1",2,2,2,0,1,2000,3000,4000,"このユニットはテスト2用です。効果なんてないよおおおおお"),
-        new CardData(3,"name2",3,3,3,8,1,3000,4000,5000,"このユニットはテスト3用です。効果なんてないよおおおおお"),
-        new CardData(4,"name3",4,4,4,0,1,4000,5000,6000,"このユニットはテスト4用です。効果なんてないよおおおおお"),
-        new CardData(5,"name4",5,5,5,0,1,5000,6000,7000,"このユニットはテスト5用です。効果なんてないよおおおおお"),
+        //new CardData(1,"name0",1,1,1,0,1,1000,2000,3000,"このユニットはテスト用です。効果なんてないよおおおおお"),
+        //new CardData(2,"name1",2,2,2,0,1,2000,3000,4000,"このユニットはテスト2用です。効果なんてないよおおおおお"),
+        //new CardData(3,"name2",3,3,3,8,1,3000,4000,5000,"このユニットはテスト3用です。効果なんてないよおおおおお"),
+        //new CardData(4,"name3",4,4,4,0,1,4000,5000,6000,"このユニットはテスト4用です。効果なんてないよおおおおお"),
+        //new CardData(5,"name4",5,5,5,0,1,5000,6000,7000,"このユニットはテスト5用です。効果なんてないよおおおおお"),
     };
     List<CardData> player2CardDataList = new List<CardData>()
     {
-        new CardData(4,"name3",4,4,4,0,1,4000,5000,6000,"このユニットはテスト4用です。効果なんてないよおおおおお"),
-        new CardData(5,"name4",5,5,5,0,1,5000,6000,7000,"このユニットはテスト5用です。効果なんてないよおおおおお"),
-        new CardData(6,"name5",6,0,0,0,1,0,0,0,"このユニットはテスト6用です。効果なんてないよおおおおお"),
+        //new CardData(4,"name3",4,4,4,0,1,4000,5000,6000,"このユニットはテスト4用です。効果なんてないよおおおおお"),
+        //new CardData(5,"name4",5,5,5,0,1,5000,6000,7000,"このユニットはテスト5用です。効果なんてないよおおおおお"),
+        //new CardData(6,"name5",6,0,0,0,1,0,0,0,"このユニットはテスト6用です。効果なんてないよおおおおお"),
     };
 
     Player currentPlayer;
@@ -68,12 +88,12 @@ public class GameMaster : MonoBehaviour
     {
         Debug.Log("InitPhase");
         //デッキの生成
-        deckGenerater.Generate(player1CardDataList, playerList[0].deck);
-        deckGenerater.Generate(player2CardDataList, playerList[1].deck);
+        //deckGenerater.Generate(player1CardDataList, playerList[0].deck);
+        //deckGenerater.Generate(player2CardDataList, playerList[1].deck);
 
         //現在のプレイヤー
-        currentPlayer = playerList[0];
-        waitPlayer    = playerList[1];
+        //currentPlayer = playerList[0];
+        //waitPlayer    = playerList[1];
 
         phase = Phase.DRAW;
     }

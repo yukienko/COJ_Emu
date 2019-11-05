@@ -14,17 +14,39 @@ public class Card : MonoBehaviour
     public Text levelText;
     public Text CPText;
     public Text BPText;
-    int id;
-    new string name;
-    int cp;
-    int color;
-    int[] race = new int[2];
-    int[] bp = new int[3];
-    int level;
-    string effectText;
+    public int id;
+    public new string name;
+	public int section;
+	public int cp;
+	public int color;
+	public int[] race = new int[2];
+	public int[] bp = new int[3];
+	public string effectText;
+	public string flavorText;
+	public int useGauge;
+	DeckGenerater deckgenerater;
+	Player player_c;
+	Player player_j;
 
-    //DeckGeneraterの中でしか起こらないのでレベルに対応したBp変化はいらない
-    public void Load(CardData _cardData)
+
+	private void Start()
+	{
+		deckgenerater = GameObject.Find("Deck").GetComponent<DeckGenerater>();
+		player_c = GameObject.Find("Content_Cards").GetComponent<Player>();
+		player_j = GameObject.Find("Content_Jokers").GetComponent<Player>();
+	}
+
+	//カードをDeckGenerater_DEを使ってデッキに追加する。
+	public void DeckLoad()
+	{
+		CardData cardDataList = new CardData(id, name, section, cp, color, race[0], race[1], bp[0], bp[1], bp[2], effectText, flavorText);
+		//右クリックでデッキに追加
+		Debug.Log("Load:Card_" + cardDataList.name);
+		deckgenerater.Generate(cardDataList, player_c.deck_);
+	}
+
+	//DeckGeneraterの中でしか起こらないのでレベルに対応したBp変化はいらない
+	public void Load(CardData _cardData)
     {
         id = _cardData.id;
         name = _cardData.name;
@@ -37,7 +59,5 @@ public class Card : MonoBehaviour
         bp[1] = _cardData.bp2;
         bp[2] = _cardData.bp3;
         BPText.text = bp[0].ToString();
-        level = _cardData.level;
-        levelText.text = level.ToString();
     }
 }
