@@ -5,9 +5,11 @@ using UnityEngine;
 public class GameMaster : MonoBehaviour
 {
     public Player player;
+	public Deck deck;
 	public ReadText readText;
 	DeckGenerater deckGenerater;
 	CardGenerater cardGenerater;
+
 
 	enum Phase
     {
@@ -24,15 +26,16 @@ public class GameMaster : MonoBehaviour
         deckGenerater = GetComponent<DeckGenerater>();
         phase = Phase.INIT;
 
-		//CardData‚©‚ç‚·‚×‚Ä‚ÌƒJ[ƒh‚ğˆê“x¶¬‚·‚é
-		cardGenerater = GetComponent<CardGenerater>();
 
-		//CardData‚Ì‘¶İ‚·‚é–‡”•ªŒJ‚è•Ô‚·
+		//=====CardDataã‹ã‚‰ã™ã¹ã¦ã®ã‚«ãƒ¼ãƒ‰ã‚’ä¸€åº¦ç”Ÿæˆã™ã‚‹=====
+
+		cardGenerater = GetComponent<CardGenerater>();
+		//CardDataã®å­˜åœ¨ã™ã‚‹æšæ•°åˆ†ç¹°ã‚Šè¿”ã™
 		for (int i = 0; i < readText.textWords.GetLength(0); i++)
 		{
-			//ƒNƒŠƒbƒN‚³‚ê‚½‚Æ‚«‚ÉŒÄ‚Ño‚·B
-			//ƒJ[ƒh‚Ì•\¦‚¾‚¯s‚¤
-			//CardData_DE(int _id, string _name, int _section, int _cp, int _color, int _race1, int _race2, int level, int _bp1, int _bp2, int _bp3, string _effectText,string _flavorText)
+			//ã‚¯ãƒªãƒƒã‚¯ã•ã‚ŒãŸã¨ãã«å‘¼ã³å‡ºã™ã€‚
+			//ã‚«ãƒ¼ãƒ‰ã®è¡¨ç¤ºã ã‘è¡Œã†
+			//CardData_DE(int _id, string _name, int _section, int _cp, int _color, int _race1, int _race2, int _bp1, int _bp2, int _bp3, string _effectText,string _flavorText)
 			CardData generateCardList = new CardData(int.Parse(readText.textWords[i, 0]), readText.textWords[i, 1], int.Parse(readText.textWords[i, 2]), int.Parse(readText.textWords[i, 3]), int.Parse(readText.textWords[i, 4]), int.Parse(readText.textWords[i, 5]), int.Parse(readText.textWords[i, 6]), int.Parse(readText.textWords[i, 7]), int.Parse(readText.textWords[i, 8]), int.Parse(readText.textWords[i, 9]), readText.textWords[i, 10], readText.textWords[i, 11]);
 
 			cardGenerater.Generate(generateCardList, player.cardList);
@@ -60,67 +63,45 @@ public class GameMaster : MonoBehaviour
         }
     }
 
-
-
-
-
-	//CardData(int _id, string _name, int _cp, int _color, int _race1, int _race2, int _level, int _bp1, int _bp2, int _bp3, string _effectText)
-
-	List<CardData> player1CardDataList = new List<CardData>()
-    {
-        //new CardData(1,"name0",1,1,1,0,1,1000,2000,3000,"‚±‚Ìƒ†ƒjƒbƒg‚ÍƒeƒXƒg—p‚Å‚·BŒø‰Ê‚È‚ñ‚Ä‚È‚¢‚æ‚¨‚¨‚¨‚¨‚¨"),
-        //new CardData(2,"name1",2,2,2,0,1,2000,3000,4000,"‚±‚Ìƒ†ƒjƒbƒg‚ÍƒeƒXƒg2—p‚Å‚·BŒø‰Ê‚È‚ñ‚Ä‚È‚¢‚æ‚¨‚¨‚¨‚¨‚¨"),
-        //new CardData(3,"name2",3,3,3,8,1,3000,4000,5000,"‚±‚Ìƒ†ƒjƒbƒg‚ÍƒeƒXƒg3—p‚Å‚·BŒø‰Ê‚È‚ñ‚Ä‚È‚¢‚æ‚¨‚¨‚¨‚¨‚¨"),
-        //new CardData(4,"name3",4,4,4,0,1,4000,5000,6000,"‚±‚Ìƒ†ƒjƒbƒg‚ÍƒeƒXƒg4—p‚Å‚·BŒø‰Ê‚È‚ñ‚Ä‚È‚¢‚æ‚¨‚¨‚¨‚¨‚¨"),
-        //new CardData(5,"name4",5,5,5,0,1,5000,6000,7000,"‚±‚Ìƒ†ƒjƒbƒg‚ÍƒeƒXƒg5—p‚Å‚·BŒø‰Ê‚È‚ñ‚Ä‚È‚¢‚æ‚¨‚¨‚¨‚¨‚¨"),
-    };
-    List<CardData> player2CardDataList = new List<CardData>()
-    {
-        //new CardData(4,"name3",4,4,4,0,1,4000,5000,6000,"‚±‚Ìƒ†ƒjƒbƒg‚ÍƒeƒXƒg4—p‚Å‚·BŒø‰Ê‚È‚ñ‚Ä‚È‚¢‚æ‚¨‚¨‚¨‚¨‚¨"),
-        //new CardData(5,"name4",5,5,5,0,1,5000,6000,7000,"‚±‚Ìƒ†ƒjƒbƒg‚ÍƒeƒXƒg5—p‚Å‚·BŒø‰Ê‚È‚ñ‚Ä‚È‚¢‚æ‚¨‚¨‚¨‚¨‚¨"),
-        //new CardData(6,"name5",6,0,0,0,1,0,0,0,"‚±‚Ìƒ†ƒjƒbƒg‚ÍƒeƒXƒg6—p‚Å‚·BŒø‰Ê‚È‚ñ‚Ä‚È‚¢‚æ‚¨‚¨‚¨‚¨‚¨"),
-    };
-
-    Player currentPlayer;
-    Player waitPlayer;
-
     void InitPhase()
     {
         Debug.Log("InitPhase");
-        //ƒfƒbƒL‚Ì¶¬
+        //ãƒ‡ãƒƒã‚­ã®ç”Ÿæˆ
         //deckGenerater.Generate(player1CardDataList, playerList[0].deck);
         //deckGenerater.Generate(player2CardDataList, playerList[1].deck);
 
-        //Œ»İ‚ÌƒvƒŒƒCƒ„[
+        //ç¾åœ¨ã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
         //currentPlayer = playerList[0];
         //waitPlayer    = playerList[1];
 
         phase = Phase.DRAW;
     }
+
     void DrawPhase()
     {
         //Debug.Log("DrawPhase");
-        //ƒJ[ƒh‚Ìƒhƒ[
+        //ã‚«ãƒ¼ãƒ‰ã®ãƒ‰ãƒ­ãƒ¼
         
         phase = Phase.MAIN;
     }
 
-    //ƒ^[ƒ“§Œä‚É‚·‚é
+    //ä»Šã¯ãƒœã‚¿ãƒ³åˆ¶å¾¡ã§ã‚«ãƒ¼ãƒ‰ãƒ‰ãƒ­ãƒ¼ã€‚ã‚¿ãƒ¼ãƒ³åˆ¶å¾¡ã«ã™ã‚‹
     public void DrawButton()
     {
-        currentPlayer.Draw();
+		player.Draw();
+		player.Draw();
     }
     void MainPhase()
     {
         //Debug.Log("StandbyPhase");
-        //CP‰ñ•œ+1(ãŒÀ‚V)As“®Œ ‰ñ•œ
+        //CPå›å¾©+1(ä¸Šé™ï¼—)ã€è¡Œå‹•æ¨©å›å¾©
         phase = Phase.BATTLE;
     }
 
-    //ƒvƒŒƒCƒ„[‚ÌˆÚ“®‚³‚¹‚½ƒJ[ƒh‚É‚·‚é
+    //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç§»å‹•ã•ã›ãŸã‚«ãƒ¼ãƒ‰ã«ã™ã‚‹
     public void SummonButton()
     {
-        currentPlayer.MainPhaseAction();
+        player.MainPhaseAction();
     }
     void BattlePhase()
     {

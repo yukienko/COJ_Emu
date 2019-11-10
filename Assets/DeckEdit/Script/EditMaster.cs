@@ -45,5 +45,3 @@ public class EditMaster : MonoBehaviour
 
 	}
 }
-
-

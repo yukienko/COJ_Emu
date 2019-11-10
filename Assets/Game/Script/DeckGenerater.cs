@@ -21,33 +21,19 @@ public class DeckGenerater : MonoBehaviour
 
 	public void Generate(CardData _cardDataList, Deck _deck)
 	{
-		//このデッキデータが対戦で使えるかどうか判別
-		if (_deck.cardList.Count != deckCardLimit)
-		{
-			Debug.Log("error:デッキのカード枚数がおかしいです。");
-			return;
-		}
-		same = 0;
-		for (int i = 0; i < _deck.cardList.Count; i++)
-		{
-			if (_deck.cardList[i].id == _cardDataList.id)
-				same++;
-		}
-		if (same >= sameCardLimit)
-		{
-			Debug.Log("同じカードは3枚までです");
-			return;
-		}
+
 
 		//カードのもとを生成してここからプレイヤーが判別できるように情報を加えていく
 		GameObject cardObj = Instantiate(cardPrefab);
 		cardObj.name = _cardDataList.name;
 		GameObject cardImage = cardObj.transform.Find("Image").gameObject;
 
+		Debug.Log(_cardDataList.section);
 		switch (_cardDataList.section)
 		{
 			//ユニット
 			case 1:
+				Debug.Log("UnitCard_ImageLoad");
 				cardImagePath = Environment.CurrentDirectory + "\\cardImage\\units\\unit (" + _cardDataList.id.ToString() + ").jpg";
 				//Debug.Log(cardImagePath);
 				break;
