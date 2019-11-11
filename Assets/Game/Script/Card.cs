@@ -70,13 +70,11 @@ public class Card : MonoBehaviour
 
 	public void Select()
 	{
-		Debug.Log("hoge");
 		ActiveButton();
 	}
 
 	public void UnSelect()
 	{
-		Debug.Log("Wawawawa");
 		UnActiveButton();
 	}
 
