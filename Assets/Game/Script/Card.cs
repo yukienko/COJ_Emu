@@ -55,9 +55,18 @@ public class Card : MonoBehaviour
 	//フィールドにいるときにクリックされたら攻撃、撤退ボタンを表示する。インフォメーションもここから呼び出しましょう
 	public void ActiveButton()
 	{
-		Attack_B.SetActive(true);
-		Tettai_B.SetActive(true);
-		ForUnActionImage_GO.SetActive(true);
+		//左クリック
+		if (Input.GetMouseButtonDown(0))
+		{
+			Attack_B.SetActive(true);
+			Tettai_B.SetActive(true);
+			ForUnActionImage_GO.SetActive(true);
+		}
+		//右クリック
+		else if (Input.GetMouseButtonDown(1))
+		{
+
+		}
 	}
 
 	//ボタンの非表示

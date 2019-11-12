@@ -23,7 +23,7 @@ public class Sutehuda : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.A))
 		{
 			Card card = Pull(0);
-			Debug.Log(card.name);
+			Debug.Log("削除:" + card.name);
 			card.gameObject.SetActive(true);
 			card.transform.SetParent(tmp.transform);
 		}
