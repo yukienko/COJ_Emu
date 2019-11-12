@@ -56,7 +56,8 @@ public class Player : MonoBehaviour
 		//仮のゲームオブジェクト
 		Card myGO;
 
-		//リストの入れ替え
+		//リストの入れ替え(質問のリンク)
+		//https://teratail.com/questions/222345
 		for (int i = 0; i < n; i++)
 		{
 			int r = i + (int)(_random.NextDouble() * (n - i));
