@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * 手札のスクリプト
+ */
+
 public class Hand : MonoBehaviour
 {
     public List<Card> cardList = new List<Card>();

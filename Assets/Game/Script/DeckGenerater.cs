@@ -9,6 +9,12 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+/*
+ * デッキを生成するためのスクリプト
+ * 初回読み込み以外使わないと思う。
+ * カードの複製などの生成はCardGenerater
+ */
+
 public class DeckGenerater : MonoBehaviour
 {
 	public GameObject cardPrefab;
@@ -19,8 +25,6 @@ public class DeckGenerater : MonoBehaviour
 
 	public void Generate(CardData _cardDataList, Deck _deck)
 	{
-
-
 		//カードのもとを生成してここからプレイヤーが判別できるように情報を加えていく
 		GameObject cardObj = Instantiate(cardPrefab);
 		cardObj.name = _cardDataList.name;

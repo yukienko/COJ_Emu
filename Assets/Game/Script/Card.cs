@@ -9,6 +9,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+ * カード自体のスクリプト
+ * これ自体にカードを構成するための変数などすべて入っているので何か呼び出すときはここから呼び出せる
+ */
+
 public class Card : MonoBehaviour
 {
 	//カード上に表示するUI用
@@ -29,7 +34,9 @@ public class Card : MonoBehaviour
 	public int[] bp = new int[3];
 	public string effectText;
 	public string flavorText;
+	public int level;
 	public int useGauge;
+
 
 	//
 	DeckGenerater deckgenerater;
@@ -49,7 +56,7 @@ public class Card : MonoBehaviour
 	//カードをDeckGenerater_DEを使ってデッキに追加する。
 	public void DeckLoad()
 	{
-		CardData cardDataList = new CardData(id, name, section, cp, color, race[0], race[1], bp[0], bp[1], bp[2], effectText, flavorText);
+		CardData cardDataList = new CardData(id, name, section, cp, color, race[0], race[1], bp[0], bp[1], bp[2], effectText, flavorText,level);
 		Debug.Log("Load:Card_" + cardDataList.name);
 		deckgenerater.Generate(cardDataList, player_c.deck_);
 	}
@@ -68,7 +75,7 @@ public class Card : MonoBehaviour
 		//右クリック
 		else if (Input.GetMouseButtonDown(1))
 		{
-			CardData cardDataList = new CardData(id, name, section, cp, color, race[0], race[1], bp[0], bp[1], bp[2], effectText, flavorText);
+			CardData cardDataList = new CardData(id, name, section, cp, color, race[0], race[1], bp[0], bp[1], bp[2], effectText, flavorText,level);
 			Infomation.LoadInfo(cardDataList);
 		}
 	}
@@ -118,6 +125,7 @@ public class Card : MonoBehaviour
 		bp[1] = _cardData.bp2;
 		bp[2] = _cardData.bp3;
 		effectText = _cardData.effectText;
+		level = _cardData.level;
 		BPText.text = bp[0].ToString();
 		//カードがトリガー、インターセプトならBPは必要ないのでハイフン表示にする
 		if (_cardData.section == 3 || _cardData.section == 4)

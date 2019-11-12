@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * これつかってなくね？
+ */
+
 public class CardList : MonoBehaviour
 {
 	public List<Card> cardList = new List<Card>();

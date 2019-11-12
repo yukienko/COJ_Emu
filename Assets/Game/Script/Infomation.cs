@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+ * カードをクリックしたときにカード情報パネルにてユーザーに視的に情報を伝える
+ */
+
 public class Infomation : MonoBehaviour
 {
 	//インフォのとこのやつら
@@ -17,6 +21,9 @@ public class Infomation : MonoBehaviour
 	public Text bp1;
 	public Text bp2;
 	public Text bp3;
+	public GameObject lv1;
+	public GameObject lv2;
+	public GameObject lv3;
 
 
 	enum Section
@@ -57,6 +64,7 @@ public class Infomation : MonoBehaviour
 		武神
 	}
 
+	//カードの情報を出しましょ
 	public void LoadInfo(CardData cardData)
 	{
 		name.text = cardData.name;
@@ -89,6 +97,27 @@ public class Infomation : MonoBehaviour
 		bp3.text = cardData.bp3.ToString();
 		effect.text = cardData.effectText;
 
+		//レベルで赤くする場所を変更
+		switch (cardData.level)
+		{
+			case 1:
+				lv1.SetActive(true);
+				lv2.SetActive(false);
+				lv3.SetActive(false);
+				break;
+			case 2:
+				lv1.SetActive(false);
+				lv2.SetActive(true);
+				lv3.SetActive(false);
+				break;
+			case 3:
+				lv1.SetActive(false);
+				lv2.SetActive(false);
+				lv3.SetActive(true);
+				break;
+		}
+
+		//色をかえましょ
 		switch (cardData.color)
 		{
 			case 0:
@@ -107,6 +136,7 @@ public class Infomation : MonoBehaviour
 				ColorImage.GetComponent<Image>().color = Color.green;
 				break;
 			case 5:
+				//紫はじぶんで作って
 				ColorImage.GetComponent<Image>().color = Color.white;
 				break;
 		}

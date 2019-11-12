@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * CSVファイルからカード情報を読み取るスクリプト
+ */
+
 public class ReadText : MonoBehaviour
 {
     public string[] textMessage; //テキストの加工前の一行を入れる変数

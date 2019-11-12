@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+/*
+ * デッキのスクリプト
+ * デッキのロードなどを行う
+ */
+
 public class Deck : MonoBehaviour
 {
     public List<Card> cardList = new List<Card>();
@@ -25,14 +30,6 @@ public class Deck : MonoBehaviour
 	//デッキのロード
 	public void DeckLoad()
 	{
-		////残っているカードを「全削除
-		//cardList.Clear();
-		//foreach (Transform t in gameObject.transform)
-		//{
-		//	GameObject.Destroy(t.gameObject);
-		//}
-
-
 		//ここで読み込むデッキを変更できるように
 		string deckName = "完成";
 

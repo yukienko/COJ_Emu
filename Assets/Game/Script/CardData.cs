@@ -7,10 +7,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * カード情報の送受信で使われる。
+ * カードの構成要素などを1つのデータとして扱わせるためのテンプレート
+ */
+
 public class CardData
 {
     public int id;
-    public new string name;
+    public string name;
 	public int section;
     public int cp;
     public int color;
@@ -21,9 +26,10 @@ public class CardData
     public int bp3;
     public string effectText;
 	public string flavorText;
+	public int level;
 
 
-	public CardData(int _id, string _name, int _section, int _cp, int _color, int _race1, int _race2, int _bp1, int _bp2, int _bp3, string _effectText, string _flavorText)
+	public CardData(int _id, string _name, int _section, int _cp, int _color, int _race1, int _race2, int _bp1, int _bp2, int _bp3, string _effectText, string _flavorText, int _level)
     {
         id = _id;
         name = _name;
@@ -37,5 +43,6 @@ public class CardData
         bp3 = _bp3;
         effectText = _effectText;
 		flavorText = _flavorText;
+		level = _level;
     }
 }

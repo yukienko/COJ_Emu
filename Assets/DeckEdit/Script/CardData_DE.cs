@@ -5,7 +5,7 @@ using UnityEngine;
 public class CardData_DE : MonoBehaviour
 {
 	public int id;
-	public new string name;
+	public string name;
 	public int section;
 	public int cp;
 	public int color;

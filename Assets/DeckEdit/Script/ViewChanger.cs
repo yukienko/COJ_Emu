@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+ * DeckEditでジョーカーとカードを切り替えるスクリプト
+ */
+
 public class ViewChanger : MonoBehaviour
 {
 	//Dropdownを格納する変数
