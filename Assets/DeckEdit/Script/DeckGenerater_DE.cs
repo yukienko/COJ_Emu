@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-using UnityEngine;
 using System;
 
 public class DeckGenerater_DE : MonoBehaviour

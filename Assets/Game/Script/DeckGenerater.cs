@@ -16,8 +16,6 @@ public class DeckGenerater : MonoBehaviour
 	string cardImagePath;
 	private const int sameCardLimit = 3;
 	private const int deckCardLimit = 40;
-	int same = 0;
-
 
 	public void Generate(CardData _cardDataList, Deck _deck)
 	{
