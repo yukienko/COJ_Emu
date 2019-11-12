@@ -33,6 +33,7 @@ public class Card : MonoBehaviour
 
 	//
 	DeckGenerater deckgenerater;
+	Infomation Infomation;
 	Player player_c;
 	Player player_j;
 
@@ -40,6 +41,7 @@ public class Card : MonoBehaviour
 	private void Start()
 	{
 		deckgenerater = GameObject.Find("GameMaster").GetComponent<DeckGenerater>();
+		Infomation = GameObject.Find("InfomationUI").GetComponent<Infomation>();
 		player_c = GameObject.Find("Card1").GetComponent<Player>();
 		player_j = GameObject.Find("Joker1").GetComponent<Player>();
 	}
@@ -61,11 +63,13 @@ public class Card : MonoBehaviour
 			Attack_B.SetActive(true);
 			Tettai_B.SetActive(true);
 			ForUnActionImage_GO.SetActive(true);
+			
 		}
 		//右クリック
 		else if (Input.GetMouseButtonDown(1))
 		{
-
+			CardData cardDataList = new CardData(id, name, section, cp, color, race[0], race[1], bp[0], bp[1], bp[2], effectText, flavorText);
+			Infomation.LoadInfo(cardDataList);
 		}
 	}
 
@@ -113,6 +117,7 @@ public class Card : MonoBehaviour
 		bp[0] = _cardData.bp1;
 		bp[1] = _cardData.bp2;
 		bp[2] = _cardData.bp3;
+		effectText = _cardData.effectText;
 		BPText.text = bp[0].ToString();
 		//カードがトリガー、インターセプトならBPは必要ないのでハイフン表示にする
 		if (_cardData.section == 3 || _cardData.section == 4)
