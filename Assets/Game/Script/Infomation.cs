@@ -136,7 +136,7 @@ public class Infomation : MonoBehaviour
 				ColorImage.GetComponent<Image>().color = Color.green;
 				break;
 			case 5:
-				//紫はじぶんで作って
+				//紫は作って
 				ColorImage.GetComponent<Image>().color = Color.white;
 				break;
 		}
