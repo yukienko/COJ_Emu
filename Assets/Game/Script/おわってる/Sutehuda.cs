@@ -44,6 +44,8 @@ public class Sutehuda : MonoBehaviour
 		}
 		//追加
 		_card.transform.SetParent(SutehudaPanel.transform);
+		var cardTraZ = -0.5f;	//カードを表示したときちょうどいい感じの位置になる
+		_card.transform.position += new Vector3(0, 0, cardTraZ);
 		cardList.Add(_card);
 
 		//捨て札の更新

@@ -37,4 +37,34 @@ public class MoveScene : MonoBehaviour
 		Loading.text = loading;
 		SceneManager.LoadScene("Title");
 	}
+
+	public void MoveToUNET()
+	{
+		Loading.text = loading;
+		SceneManager.LoadScene("UNET");
+	}
+
+	public void MoveToUNET2()
+	{
+		Loading.text = loading;
+		SceneManager.LoadScene("UNET2");
+	}
+
+	public void MoveToUNET3()
+	{
+		Loading.text = loading;
+		SceneManager.LoadScene("UNET3");
+	}
+
+	public void MoveToUNET4()
+	{
+		Loading.text = loading;
+		SceneManager.LoadScene("UNET4");
+	}
+
+	public void MoveToUNET5()
+	{
+		Loading.text = loading;
+		SceneManager.LoadScene("UNET5");
+	}
 }
