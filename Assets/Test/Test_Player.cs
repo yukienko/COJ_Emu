@@ -22,7 +22,8 @@ public class Test_Player : NetworkBehaviour
 	public enum State
 	{
 		Initializing,	//初期化中
-		Connect,		//準備完了、キー入力受付中
+		Connect,		//準備完了、ホストに入れます。
+		Ready,			//ホストに接続済み
 	}
 
 	// プレイヤーの状態
@@ -72,7 +73,7 @@ public class Test_Player : NetworkBehaviour
 	[Command]
 	void CmdInitialize(string playerName)
 	{
-		ChangeState(State.Connect);
+		ChangeState(State.Ready);
 		ChangePlayerName(playerName);
 	}
 
@@ -147,5 +148,10 @@ public class Test_Player : NetworkBehaviour
 	{
 		//m_Idを変更すれば、あとはhookによりOnIdChangeが実行
 		m_Id = id;
+	}
+
+	private void Update()
+	{
+		Debug.Log(m_State);
 	}
 }

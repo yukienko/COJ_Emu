@@ -9,7 +9,8 @@ public class GameController : NetworkBehaviour
 	public enum State
 	{
 		WaitOtherPlayerConnect, //ほかプレイヤーの参加待ち
-		Connect,				//他プレイヤーと接続中
+		Ready,					//他プレイヤーと接続中
+		Battle,					//ルームの作成
 	}
 
 	[SyncVar(hook = "OnStateChanged")]
@@ -26,13 +27,15 @@ public class GameController : NetworkBehaviour
 	[ServerCallback]
 	void Update()
     {
+		
 		switch (m_State)
 		{
 			case State.WaitOtherPlayerConnect:
-				//UpDateWaitOtherPlayerConnect();
+				UpDateWaitOtherPlayerConnect();
 				break;
-			case State.Connect:
-				//UpdateResult();
+				//クライアント側から準備完了
+			case State.Ready:
+				UpDateReady();
 				break;
 			default:
 				Debug.LogError("想定外のGameState" + m_State);
@@ -42,15 +45,25 @@ public class GameController : NetworkBehaviour
 
 	//ほかプレイヤーの接続を待っているときのUpDate
 	[Server]
-	void UpDataWaitOtherPalyerConnect()
+	void UpDateWaitOtherPlayerConnect()
 	{
+		
 		//Ready状態のプレイヤーの数を数え、2の場合は対戦を開始する
 		int readyPlayerCount = 0;
 
 		foreach(Test_Player player in FindObjectsOfType<Test_Player>())
 		{
-			
+			if (player.m_State == Test_Player.State.Connect && readyPlayerCount == 0)
+			{
+				readyPlayerCount++;
+			}
 		}
+
+		//対戦相手が1人以上いればバトルの開始(サーバの状態をバトルモードに移行)
+		if (readyPlayerCount > 2)
+			ChangeGameState(State.Battle);
+		else
+			Debug.Log("参加者受付中！現在のルーム内人数は" + readyPlayerCount + "人です");
 	}
 
 	//各プレイヤーが接続したときのUpdate
@@ -58,6 +71,20 @@ public class GameController : NetworkBehaviour
 	void UpDateConnecting()
 	{
 		Test_Player[] players = FindObjectsOfType<Test_Player>();
+	}
+
+	[Server]
+	void UpDateReady()
+	{
+		
+	}
+
+	// 状態を変更する
+	[Server]
+	void ChangeGameState(State state)
+	{
+		// m_GameStateを変更すれば、あとはhookによりOnStateChangedが実行される
+		m_State = state;
 	}
 
 	//GameStateが変更されたときのhook
@@ -69,7 +96,7 @@ public class GameController : NetworkBehaviour
 		{
 			case State.WaitOtherPlayerConnect:
 				break;
-			case State.Connect:
+			case State.Ready:
 				if (isServer)
 				{
 

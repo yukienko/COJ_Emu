@@ -67,4 +67,10 @@ public class MoveScene : MonoBehaviour
 		Loading.text = loading;
 		SceneManager.LoadScene("UNET5");
 	}
+
+	public void MoveToTest1()
+	{
+		Loading.text = loading;
+		SceneManager.LoadScene("Test1");
+	}
 }
