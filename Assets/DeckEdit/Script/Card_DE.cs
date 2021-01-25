@@ -15,54 +15,97 @@ public class Card_DE : MonoBehaviour
 	public int[] bp = new int[3];
 	public string effectText;
 	public string flavorText;
+	public int useGauge;
 	Infomation_DE infomation_DE;
 	DeckGenerater_DE deckgenerater_DE;
-	Player_DE player_;
-	Deck_DE deck_DE;
+	Player_DE player_c;
+	Player_DE player_j;
 
 	private void Start()
 	{
 		infomation_DE = GameObject.Find("Infomation").GetComponent<Infomation_DE>();
 		deckgenerater_DE = GameObject.Find("Deck").GetComponent<DeckGenerater_DE>();
-		player_ = GameObject.Find("Content_Cards").GetComponent<Player_DE>();
-		deck_DE = GameObject.Find("Content_Deck").GetComponent<Deck_DE>();
+		player_c = GameObject.Find("Content_Cards").GetComponent<Player_DE>();
+		player_j = GameObject.Find("Content_Jokers").GetComponent<Player_DE>();
 	}
 
+	//カードをDeckGenerater_DEを使ってデッキに追加する。
 	public void DeckLoad()
 	{
 		CardData_DE cardDataList = new CardData_DE(id, name, section, cp, color, race[0], race[1], bp[0], bp[1], bp[2], effectText, flavorText);
 		//右クリックでデッキに追加
-		Debug.Log("Add");
-		deckgenerater_DE.Generate(cardDataList, player_.deck_);
+		Debug.Log("Load:Card_" + cardDataList.name);
+		deckgenerater_DE.Generate(cardDataList, player_c.deck_);
+	}
+
+	//ジョーカーをDeckGenerater_DEを使ってデッキに追加する.
+	public void DeckLoad_Joker()
+	{
+		JokerData_DE jokerDataList = new JokerData_DE(id, name, section, cp, effectText, useGauge);
+		//ジョーカー追加
+		Debug.Log("Load:Joker_" + jokerDataList.name);
+		deckgenerater_DE.JokerGenerate(jokerDataList, player_j.joker_DE);
+
 	}
 
 	public void MyPointerDownUI()
 	{
-		CardData_DE cardDataList = new CardData_DE(id, name, section, cp, color, race[0], race[1], bp[0], bp[1], bp[2], effectText, flavorText);
-		if (Input.GetMouseButtonDown(1))
+		//押したカードがジョーカーだった
+		if (section == 0)
 		{
-			//左クリックで説明表示
-			Debug.Log("Infomation");
-			infomation_DE.LoadInfo(cardDataList);
+			JokerData_DE jokerDataList = new JokerData_DE(id, name, section, cp, effectText, useGauge);
+			if (Input.GetMouseButtonDown(1))
+			{
+				//左クリックで説明表示
+				Debug.Log("Infomation");
+				infomation_DE.LoadInfo_Joker(jokerDataList);
+			}
+			else if (Input.GetMouseButtonDown(0))
+			{
+				//親がContents_Deckなら追加,Contents_Cardなら削除とする
+				if (transform.parent.name == "Content_Jokers")
+				{
+					//右クリックでデッキに追加
+					Debug.Log("Add");
+					deckgenerater_DE.JokerGenerate(jokerDataList, player_j.joker_DE);
+				}
+				else
+				{
+					//右クリックでデッキから削除
+					Debug.Log("Del");
+					deckgenerater_DE.DeleteJoker(jokerDataList, player_j.joker_DE, transform);
+					GameObject.Destroy(gameObject);
+				}
+			}
 		}
-		else if(Input.GetMouseButtonDown(0))
+		//押したカードがユニットなどのカードだった
+		else
 		{
-			//親がContents_Deckなら追加,Contents_Cardなら削除とする
-			if(transform.parent.name == "Content_Cards")
+			CardData_DE cardDataList = new CardData_DE(id, name, section, cp, color, race[0], race[1], bp[0], bp[1], bp[2], effectText, flavorText);
+			if (Input.GetMouseButtonDown(1))
 			{
-				//右クリックでデッキに追加
-				Debug.Log("Add");
-				deckgenerater_DE.Generate(cardDataList, player_.deck_);
+				//左クリックで説明表示
+				Debug.Log("Infomation");
+				infomation_DE.LoadInfo(cardDataList);
 			}
-			else
+			else if (Input.GetMouseButtonDown(0))
 			{
-				//右クリックでデッキから削除
-				Debug.Log("Del");
-				deckgenerater_DE.Delete(cardDataList, player_.deck_,transform);
-				GameObject.Destroy(gameObject);
+				//親がContents_Deckなら追加,Contents_Cardなら削除とする
+				if (transform.parent.name == "Content_Cards")
+				{
+					//右クリックでデッキに追加
+					Debug.Log("Add");
+					deckgenerater_DE.Generate(cardDataList, player_c.deck_);
+				}
+				else
+				{
+					//右クリックでデッキから削除
+					Debug.Log("Del");
+					deckgenerater_DE.Delete(cardDataList, player_c.deck_, transform);
+					GameObject.Destroy(gameObject);
+				}
 			}
 		}
-
 	}
 
 	//DeckGeneraterの中でしか起こらないのでレベルに対応したBp変化はいらない
@@ -81,4 +124,14 @@ public class Card_DE : MonoBehaviour
 		effectText = _cardData.effectText;
 		flavorText = _cardData.flavorText;
 	}
+
+	public void LoadJoker(JokerData_DE _cardData)
+	{
+		id = _cardData.id;
+		name = _cardData.name;
+		cp = _cardData.cp;
+		effectText = _cardData.effectText;
+		useGauge = _cardData.useGauge;
+	}
+
 }

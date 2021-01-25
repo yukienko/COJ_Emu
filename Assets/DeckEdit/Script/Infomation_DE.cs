@@ -17,6 +17,7 @@ public class Infomation_DE : MonoBehaviour
 	public Text bp3;
 	public Text effect;
 	public Text flavor;
+	public Text gauge;
 
 	enum Section
 	{
@@ -64,13 +65,53 @@ public class Infomation_DE : MonoBehaviour
 		緑,
 		紫
 	};
+	public enum JokerGauge
+	{
+		無,
+		小,
+		中,
+		大,
+		特,
+		全,
+	};
+
+
+	public void LoadInfo_Joker(JokerData_DE jokerData_DE)
+	{
+		name.text = jokerData_DE.name;
+		for (int i = 0; i < Enum.GetNames(typeof(Section)).Length; i++)
+		{
+			if (jokerData_DE.section == i)
+			{
+				Section _section = (Section)Enum.ToObject(typeof(Section), i);
+				section.text = _section.ToString();
+			}
+		}
+		cp.text = jokerData_DE.cp.ToString();
+		effect.text = jokerData_DE.effectText;
+		for (int i = 0; i < Enum.GetNames(typeof(JokerGauge)).Length; i++)
+		{
+			if (jokerData_DE.useGauge == i)
+			{
+				JokerGauge _gauge = (JokerGauge)Enum.ToObject(typeof(JokerGauge), i);
+				gauge.text = _gauge.ToString();
+			}
+		}
+		color.text = "-";
+		race1.text = "-";
+		race2.text = "-";
+		bp1.text = "-";
+		bp2.text = "-";
+		bp3.text = "-";
+		flavor.text = "-";
+	}
 
 	public void LoadInfo(CardData_DE cardData_DE)
 	{
 		name.text = cardData_DE.name;
-		for(int i = 0; i < Enum.GetNames(typeof(Section)).Length; i++)
+		for (int i = 0; i < Enum.GetNames(typeof(Section)).Length; i++)
 		{
-			if(cardData_DE.section == i)
+			if (cardData_DE.section == i)
 			{
 				Section _section = (Section)Enum.ToObject(typeof(Section), i);
 				section.text = _section.ToString();
@@ -105,5 +146,6 @@ public class Infomation_DE : MonoBehaviour
 		bp3.text = cardData_DE.bp3.ToString();
 		effect.text = cardData_DE.effectText;
 		flavor.text = cardData_DE.flavorText;
+		gauge.text = "-";
 	}
 }

@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * 手札のスクリプト
+ */
+
 public class Hand : MonoBehaviour
 {
     public List<Card> cardList = new List<Card>();
@@ -17,4 +21,12 @@ public class Hand : MonoBehaviour
         cardList.Remove(card);
         return card;
     }
+
+	//先頭のカードを捨てる
+	public Card Dump()
+	{
+		Card card = cardList[0];
+		cardList.Remove(card);
+		return card;
+	}
 }

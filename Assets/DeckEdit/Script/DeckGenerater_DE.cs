@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-using UnityEngine;
 using System;
 
 public class DeckGenerater_DE : MonoBehaviour
 {
 	public GameObject cardPrefab;
 	Sprite sprite;
-	string cardImagePath;
+	string cardImagePath = "";
+	string jokerImagePath = "";
 	int same = 0;
 	private const int sameCardLimit = 3;
 	private const int deckCardLimit = 40;
+	private const int sameJokerLimit = 1;
+	private const int deckJKokerLimit = 2;
+	Joker_DE _joker;
 
 	public void Generate(CardData_DE _cardDataList, Deck_DE _deck)
 	{
@@ -40,11 +43,6 @@ public class DeckGenerater_DE : MonoBehaviour
 
 		switch (_cardDataList.section)
 		{
-			//ジョーカー
-			case 0:
-				cardImagePath = Environment.CurrentDirectory + "\\cardImage\\jokers\\joker (" + _cardDataList.id.ToString() + ").jpg";
-				//Debug.Log(cardImagePath);
-				break;
 			//ユニット
 			case 1:
 				cardImagePath = Environment.CurrentDirectory + "\\cardImage\\units\\unit (" + _cardDataList.id.ToString() + ").jpg";
@@ -96,20 +94,79 @@ public class DeckGenerater_DE : MonoBehaviour
 		_deck.Add(card);
 	}
 
-	public void Delete(CardData_DE _cardDataList, Deck_DE _deck, Transform transform)
+	public void JokerGenerate(JokerData_DE _jokerDataList, Joker_DE _joker)
+	{
+		if (_joker.jokerList.Count >= deckJKokerLimit)
+		{
+			Debug.Log("ジョーカーは２枚です");
+			return;
+		}
+		same = 0;
+		for (int i = 0; i < _joker.jokerList.Count; i++)
+		{
+			if (_joker.jokerList[i].id == _jokerDataList.id)
+				same++;
+		}
+		if (same >= sameJokerLimit)
+		{
+			Debug.Log("同じジョーカーは1枚までです");
+			return;
+		}
+
+
+		GameObject cardObj = Instantiate(cardPrefab);
+		cardObj.name = _jokerDataList.name;
+		GameObject cardImage = cardObj.transform.Find("Image").gameObject;
+
+		jokerImagePath = Environment.CurrentDirectory + "\\cardImage\\jokers\\joker (" + _jokerDataList.id.ToString() + ").jpg";
+
+		Texture Joker_texture = cardImage.GetComponent<Texture>();
+		if (!File.Exists(jokerImagePath))
+		{
+			Debug.Log("error");
+		}
+		else
+		{
+			Joker_texture = ReadTexture(jokerImagePath, 93, 140);
+		}
+
+		// テクスチャーを適用
+		cardImage.GetComponent<Renderer>().material.mainTexture = Joker_texture;
+		// 下地の色は白にしておく (そうしないと下地の色と乗算みたいになる)
+		cardImage.GetComponent<Renderer>().material.color = Color.white;
+
+		Card_DE card = cardObj.GetComponent<Card_DE>();
+		card.LoadJoker(_jokerDataList);
+		_joker.Add(card);
+	}
+
+	public void Delete(CardData_DE _cardDataList, Deck_DE deck_, Transform transform)
 	{
 		int childcount = 0;
-		foreach(Transform obj in _deck.transform.GetComponentInChildren<Transform>())
+		foreach(Transform obj in deck_.transform.GetComponentInChildren<Transform>())
 		{
 			if(transform == obj.transform)
 			{
-				_deck.Pull(childcount);
+				deck_.Pull(childcount);
 				return;
 			}
 			childcount++;
 		}
 	}
 
+	public void DeleteJoker(JokerData_DE _jokerDataList, Joker_DE _joker, Transform transform)
+	{
+		int childcount = 0;
+		foreach (Transform obj in _joker.transform.GetComponentInChildren<Transform>())
+		{
+			if (transform == obj.transform)
+			{
+				_joker.Pull(childcount);
+				return;
+			}
+			childcount++;
+		}
+	}
 
 	//フォルダ内のJPGを読み込む
 	Texture ReadTexture(string path, int width, int height)
@@ -138,7 +195,7 @@ public class DeckGenerater_DE : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
-        
+		_joker = GameObject.Find("Joker").GetComponent<Joker_DE>();
     }
 
     // Update is called once per frame

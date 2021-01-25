@@ -1,0 +1,110 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
+
+public class CardGenerater : MonoBehaviour
+{
+
+	public GameObject cardPrefab;
+	Sprite sprite;
+	string cardImagePath;
+
+
+	//GameMsterからカードの生成で呼ばれる
+	public void Generate(CardData _cardDataList, CardList cardList)
+	{
+
+		GameObject cardObj = Instantiate(cardPrefab);
+		cardObj.name = _cardDataList.name;
+		GameObject cardImage = cardObj.transform.Find("Image").gameObject;
+
+		switch (_cardDataList.section)
+		{
+			//ユニット
+			case 1:
+				cardImagePath = Environment.CurrentDirectory + "\\cardImage\\units\\unit (" + _cardDataList.id.ToString() + ").jpg";
+				//Debug.Log(cardImagePath);
+				break;
+			//進化
+			case 2:
+				cardImagePath = Environment.CurrentDirectory + "\\cardImage\\units\\unit (" + _cardDataList.id.ToString() + ").jpg";
+				//Debug.Log(cardImagePath);
+				break;
+			//トリガー
+			case 3:
+				cardImagePath = Environment.CurrentDirectory + "\\cardImage\\triggers\\trigger (" + _cardDataList.id.ToString() + ").jpg";
+				//Debug.Log(cardImagePath);
+				break;
+			//インターセプト
+			case 4:
+				cardImagePath = Environment.CurrentDirectory + "\\cardImage\\intercepts\\intercept (" + _cardDataList.id.ToString() + ").jpg";
+				//Debug.Log(cardImagePath);
+				break;
+			//ウイルス
+			case 5:
+				cardImagePath = Environment.CurrentDirectory + "\\cardImage\\viruses\\viruse (" + _cardDataList.id.ToString() + ").jpg";
+				//Debug.Log(cardImagePath);
+				break;
+			//カエル
+			case 6:
+				cardImagePath = Environment.CurrentDirectory + "\\cardImage\\kaeru\\kaeru.jpg";
+				//Debug.Log(cardImagePath);
+				break;
+		}
+
+		Texture Card_texture = cardImage.GetComponent<Texture>();
+		if (!File.Exists(cardImagePath))
+		{
+			Debug.Log("error");
+		}
+		else
+		{
+			Card_texture = ReadTexture(cardImagePath, 93, 140);
+		}
+		// テクスチャーを適用
+		cardImage.GetComponent<Renderer>().material.mainTexture = Card_texture;
+		// 下地の色は白にしておく (そうしないと下地の色と乗算みたいになる)
+		cardImage.GetComponent<Renderer>().material.color = Color.white;
+
+
+		Card card = cardObj.GetComponent<Card>();
+		card.Load(_cardDataList);
+		cardList.Add(card);
+	}
+
+	//フォルダ内のJPGを読み込む
+	Texture ReadTexture(string path, int width, int height)
+	{
+		byte[] readBinary = ReadJpgFile(path);
+
+		Texture2D texture = new Texture2D(width, height);
+		texture.LoadImage(readBinary);
+
+		return texture;
+	}
+
+	byte[] ReadJpgFile(string path)
+	{
+		FileStream fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
+		BinaryReader bin = new BinaryReader(fileStream);
+		byte[] values = bin.ReadBytes((int)bin.BaseStream.Length);
+
+		bin.Close();
+
+		return values;
+	}
+
+	// Start is called before the first frame update
+	void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}

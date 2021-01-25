@@ -12,7 +12,6 @@ public class LoadDeckNameObj : MonoBehaviour
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
-			Debug.Log("asda");
 			confiText.text = listText.text;
 		}
 	}

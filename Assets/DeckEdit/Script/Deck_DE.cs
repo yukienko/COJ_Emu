@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 public class Deck_DE : MonoBehaviour
 {
+	Joker_DE joker_;
 	public List<Card_DE> cardList = new List<Card_DE>();
 	public List<Transform> cardsChildren = new List<Transform>();
 	public List<Transform> objList;
@@ -19,10 +20,9 @@ public class Deck_DE : MonoBehaviour
 	public GameObject selectDeckView;
 	public Text deckName;
 	public Text selectDeckName;
-	public string[,] textMessage;
 	private const int deckCardLimit = 40;
 
-
+	//デッキにカードを追加する
 	public void Add(Card_DE _card)
 	{
 		//GameObject deck = this.transform.Find("Content_Deck").gameObject;
@@ -30,6 +30,7 @@ public class Deck_DE : MonoBehaviour
 		cardList.Add(_card);
 	}
 
+	//デッキからカードを抜く
 	public Card_DE Pull(int _position)
 	{
 		Card_DE card = cardList[_position];
@@ -37,41 +38,58 @@ public class Deck_DE : MonoBehaviour
 		return card;
 	}
 
+	//セーブパネルの表示
 	public void DeckSavePanel_Active()
 	{
 		deckName.text = "";
 		savePanel.gameObject.SetActive(true);
 	}
 
+	//セーブパネルの非表示
 	public void DeckSavePanel_UnActive()
 	{
 		savePanel.gameObject.SetActive(false);
 	}
 
+	//デッキのセーブ
 	public void DeckSave()
 	{
 		//デッキ枚数が40枚か
 		if (cardList.Count == deckCardLimit)
 		{
-			//DeckSort();
-			string deckFilePath = Environment.CurrentDirectory + "\\deckFile";
-			if (!Directory.Exists(deckFilePath))
+			//deckFilePathの作製
+			string deckFilePath = Environment.CurrentDirectory + "\\deckFile\\" + deckName.text;
+
+			//ジョーカーのセーブ
+			if (!joker_.JokerSave(deckFilePath))
 			{
-				Directory.CreateDirectory(deckFilePath);	
+				//ジョーカーが2枚未満
+				return;
 			}
-			deckFilePath = deckFilePath + "\\" + deckName.text + ".txt";
-			//var info = "DeckName:" + deckName.text;
-			//File.WriteAllText(deckFilePath, info + "\n");
+
+			//ここはDeck_DEなのでデッキのパスから
+			var deckFileCardPath = deckFilePath + "\\card.txt";
+
+			//上書きするので前のデッキデータ(card)を消しますよ
+			File.Delete(deckFileCardPath);
+
 			for (int i = 0; i < cardList.Count; i++)
 			{
 				var stream = cardList[i].name.ToString() + "\n";
-				File.AppendAllText(deckFilePath, stream);
+				File.AppendAllText(deckFileCardPath, stream);
 			}
 		}
-		Debug.Log("SaveOK");
+		else
+		{
+			Debug.Log("error:デッキを40枚にしてください。");
+			return;
+		}
+
+		Debug.Log("SaveAllOK");
 		DeckSavePanel_UnActive();
 	}
 
+	//デッキソート
 	public void DeckSort()
 	{
 		IOrderedEnumerable<Card_DE> sortList = cardList.OrderBy(b => b.section).ThenBy(a => a.id);
@@ -91,8 +109,10 @@ public class Deck_DE : MonoBehaviour
 		}
 	}
 
+	//デッキロード
 	public void DeckLoad()
 	{
+		//カードのロード
 		//残っているカードを「全削除
 		cardList.Clear();
 		foreach(Transform t in gameObject.transform)
@@ -100,16 +120,17 @@ public class Deck_DE : MonoBehaviour
 			GameObject.Destroy(t.gameObject);
 		}
 
-		string deckFilePath = Environment.CurrentDirectory + "\\deckFile";
 		//選んだデッキの名前はここに
 		string deckname = selectDeckName.text;
-		deckFilePath = deckFilePath + "\\" + deckname + ".txt";
-		if (!File.Exists(deckFilePath))
+		string deckFilePath = Environment.CurrentDirectory + "\\deckFile\\" + deckname;
+		
+		var cardPath = deckFilePath + "\\card.txt";
+		if (!File.Exists(cardPath))
 		{
-			Debug.Log("error" + deckFilePath);
+			Debug.Log("error:" + cardPath + "が存在しません");
 			return;
 		}
-		string[] deckList = File.ReadAllLines(deckFilePath);
+		string[] deckList = File.ReadAllLines(cardPath);
 		//cardsChildrenにカードリストからカードをすべて取得
 		foreach (Transform card in content_Card.transform.GetComponentInChildren<Transform>())
 		{
@@ -119,9 +140,13 @@ public class Deck_DE : MonoBehaviour
 		{
 			FromNameCardLoad(s);
 		}
+		Debug.Log("CardLoadOK");
+		joker_.JokerLoad(deckFilePath);
+		Debug.Log("LoadAllOK");
 		DeckLoadPanel_UnActive();
 	}
 
+	//DeckFileのカード名からゲーム画面右のカードリストから同じ名前のカードを探してその情報をロードする
 	void FromNameCardLoad(string s)
 	{
 		for (int i = 0; i < content_Card.transform.childCount; i++)
@@ -134,11 +159,13 @@ public class Deck_DE : MonoBehaviour
 		}
 	}
 
+	//ロードパネル表示
 	public void DeckLoadPanel_Active()
 	{
 		loadPanel.gameObject.SetActive(true);
 	}
 
+	//ロードパネル非表示
 	public void DeckLoadPanel_UnActive()
 	{
 		loadPanel.gameObject.SetActive(false);
@@ -146,11 +173,12 @@ public class Deck_DE : MonoBehaviour
 
 	private void Start()
 	{
+		joker_ = GameObject.Find("Content_Joker").GetComponent<Joker_DE>();
 		savePanel.SetActive(false);
 		loadPanel.SetActive(false);
 		//Loadするデッキをパネルに設置する。
 		string deckFilePath = Environment.CurrentDirectory + "\\deckFile";
-		string[] hoge = Directory.GetFiles(deckFilePath);
+		string[] hoge = Directory.GetDirectories(deckFilePath);
 
 		for (int i = 0; i < hoge.Count(); i++)
 		{
